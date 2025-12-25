@@ -1,0 +1,1268 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chalo Chikmagalur Corporate Tour -- Version 7</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    :root{
+      --primary:#1e3a8a;
+      --accent:#3b82f6;
+      --muted:#6b7280;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --text:#0f172a;
+      --glass: rgba(255,255,255,0.72);
+      --success: #059669;
+      --danger: #dc2626;
+      --shadow: 0 8px 24px rgba(14,30,60,0.12);
+    }
+    [data-theme="dark"]{
+      --primary:#86b7ff;
+      --accent:#60a5fa;
+      --muted:#9ca3af;
+      --bg:#061024;
+      --card: rgba(10,16,30,0.78);
+      --text: #e6eefc;
+      --glass: rgba(0,0,0,0.35);
+      --shadow: 0 8px 28px rgba(0,0,0,0.55);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#eef6ff 0%,var(--bg) 70%);
+      color:var(--text);
+      margin:0;
+      padding-bottom: 0; 
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .app {
+      max-width:880px;
+      margin:0 auto;
+      padding:12px;
+    }
+
+    .topbar{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px;
+      position:sticky;
+      top:0;
+      z-index:30;
+      background:var(--card);
+      border-bottom:1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.05);
+    }
+    .brand { display:flex; gap:12px; align-items:center; }
+    .brand img{width:52px; height:52px; object-fit:contain}
+    .brand-title { font-weight:800; color:var(--primary); font-size:1.05rem; line-height:1 }
+    .top-controls { display:flex; gap:8px; align-items:center }
+
+    .theme-btn {
+      border:0; background:transparent; font-size:1.25rem; cursor:pointer;
+      padding:8px; border-radius:8px;
+    }
+
+    .banner{
+      height:200px;
+      border-radius:14px;
+      background-image: url("https://mysurupalanquin.com/wp-content/uploads/2023/10/maxresdefault.jpg");
+      background-size:cover;
+      background-position:center;
+      margin:12px 0;
+      position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .banner::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(2,6,23,0.18), rgba(2,6,23,0.6));
+    }
+    
+    /* NEW: TIMER OVERLAY STYLES */
+    .banner-timer {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+      background: rgba(0, 50, 0, 0.6); /* Dark green glass feel */
+      backdrop-filter: blur(8px);
+      padding: 10px 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .timer-days {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 2px;
+      display: block;
+      color: #34d399; /* Accent green */
+    }
+
+    .timer-live {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .banner-text{
+      position:absolute;
+      left:18px;
+      bottom:8px;
+      z-index:2;
+      color:white;
+    }
+
+    .banner-text h2{
+      margin:0;
+      font-size:0.90rem;
+      font-weight:800;
+    }
+
+    .banner-text p{
+      margin-top:2px;
+      font-size:0.80rem;
+      opacity:0.95;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:14px;
+      margin-bottom:14px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.05);
+      border:1px solid rgba(0,0,0,0.03);
+    }
+    .card h3 { margin:0 0 10px; color:var(--primary); font-size:1.02rem }
+
+    .muted { color:var(--muted); font-size:0.95rem }
+
+    .alert {
+      background: linear-gradient(90deg, rgba(254,226,226,0.95), rgba(255,242,235,0.95));
+      padding:12px; border-radius:10px; border-left:4px solid var(--danger);
+      font-weight:700; color: #7a1919;
+    }
+    
+    
+    
+        
+    
+
+    .btn { background:var(--accent); color:white; border-radius:10px; padding:8px 12px; font-weight:800; border:0; cursor:pointer }
+    .btn.ghost { background:transparent; color:var(--primary); border:1px solid rgba(0,0,0,0.06) }
+
+    .table-scroll { overflow-x:auto; margin-top:12px; -webkit-overflow-scrolling:touch; }
+    table { border-collapse:collapse; width:100%; min-width:300px }
+    th,td { padding:10px 12px; text-align:left; border-bottom:1px solid rgba(0,0,0,0.06); font-size:0.92rem }
+    th { background:linear-gradient(180deg,var(--primary), #15429b); color:white; font-weight:800; }
+
+    /* Highlights & E-Card Section Styles */
+    .highlight-ecard {
+        background: #fff3e0;
+        border: 2px solid #ff9800;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    [data-theme="dark"] .highlight-ecard {
+        background: #2e1e0a;
+        border-color: #ef6c00;
+    }
+
+    #ecardList { display: none; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 10px; }
+
+
+
+
+    
+    
+
+    .nav-block { display:flex; flex-direction:column; gap:10px }
+    .search {
+      display:flex; gap:8px; align-items:center;
+      background:var(--glass);
+      padding:8px; border-radius:12px; border:1px solid rgba(0,0,0,0.06);
+    }
+    .search input { flex:1; border:0; background:transparent; outline:none; font-size:0.95rem; padding:6px }
+    .control-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+    .btn { background:var(--accent); color:white; border-radius:10px; padding:8px 12px; font-weight:800; border:0; cursor:pointer }
+    .btn.ghost { background:transparent; color:var(--primary); border:1px solid rgba(0,0,0,0.06) }
+
+    select {
+      padding:10px; border-radius:10px; border:1px solid rgba(0,0,0,0.06); font-weight:700; font-size:0.95rem;
+      background:var(--card); color:var(--text);
+    }
+
+    .gallery {
+      display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;
+    }
+    .gallery img { width:100%; height:120px; object-fit:cover; border-radius:10px; cursor:pointer; box-shadow:0 6px 18px rgba(2,6,23,0.06) }
+
+    .table-scroll { overflow-x:auto; margin-top:12px; -webkit-overflow-scrolling:touch; }
+    table { border-collapse:collapse; width:100%; min-width:720px }
+    th,td { padding:10px 12px; text-align:left; border-bottom:1px solid rgba(0,0,0,0.06); font-size:0.92rem }
+    th { background:linear-gradient(180deg,var(--primary), #15429b); color:white; font-weight:800; font-size:0.9rem; position:sticky; top:0 }
+    tr:hover td { background: linear-gradient(90deg, rgba(59,130,246,0.04), rgba(14,165,233,0.02)) }
+
+    .status { font-weight:800 }
+    .status.confirm { color:var(--success) }
+
+    .seatmap { display:flex; gap:12px; margin-top:12px; overflow:auto }
+    .coach { min-width:150px; padding:8px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.36)); border:1px solid rgba(0,0,0,0.04) }
+    .seat { width:36px; height:36px; border-radius:8px; background:#eef2ff; display:inline-flex; align-items:center; justify-content:center; margin:6px; cursor:pointer; color:var(--primary) }
+    .seat.selected { background:var(--primary); color:white; box-shadow: 0 6px 18px rgba(16,24,40,0.3) }
+    .seat.blank { visibility:hidden }
+
+    .lightbox { position:fixed; inset:0; display:none; background:rgba(2,6,23,0.85); align-items:center; justify-content:center; z-index:1200 }
+    .lightbox img { max-width:95%; max-height:88%; border-radius:12px; box-shadow: 0 14px 40px rgba(0,0,0,0.6); display:none; }
+    .lightbox iframe { width:90%; height:80%; border-radius:12px; border:0; display:none; }
+
+    .footer-block {
+      position: fixed;
+      left: 8px;
+      right: 8px;
+      bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+      background: var(--card);
+      border-radius: 5px;
+      box-shadow: 0 3px 10px rgba(2, 6, 23, 0.12);
+      display: flex;
+      flex-direction: column;
+      z-index: 200;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .footer-buttons {
+      display: flex;
+      justify-content: space-around;
+      gap: 3px;
+      padding: 3px;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .footer-buttons .footer-item {
+      flex: 1;
+      text-align: center;
+      padding: 10px 2px;
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      border-radius: 4px;
+      background: transparent;
+      font-size: 0.75rem;
+    }
+
+    .footer-help {
+      padding: 5px;
+      text-align: center;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    @media (max-width:520px) {
+      .banner { height:180px }
+      .banner-timer { top: 8px; right: 8px; padding: 6px 10px; }
+      .timer-days { font-size: 0.9rem; }
+      .timer-live { font-size: 0.75rem; }
+      .gallery img { height:100px }
+      .footer-block { left:6px; right:6px }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <div class="topbar" role="banner">
+    <div class="brand">
+      <img src="https://shieldhealthcare.in/wp-content/uploads/2024/09/Shield_Logo-removebg-preview.png" alt="Shield logo">
+      <div>
+        <div class="brand-title">Chalo Chikmagalur Corporate Tour (Draft Version)</div>
+        <div class="muted" style="font-size:0.80rem">Shield Healthcare · Jan 3 - Jan 6, 2026</div>
+      </div>
+    </div>
+    <div class="top-controls">
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+
+  <div class="banner" role="img" aria-label="Mullayanagiri hills">
+    <div class="banner-timer">
+        <span id="banner-days" class="timer-days">-- Days to Go</span>
+        <span id="banner-live" class="timer-live">000:00:00</span>
+    </div>
+
+    <div class="banner-text">
+      <h2></h2>
+      <p>Shield Team, Get Ready to Create Beautiful Memories 🌿✨</p>
+    </div>
+  </div>
+
+  <section class="card" aria-labelledby="urgentHeading">
+    <h3 id="urgentHeading">Reporting Date & Time (Important)</h3>
+    <div class="alert">
+      Reporting Time: <strong>10:15 PM, Jan 3, 2026</strong><br>
+      Location: <strong>MGR Central Railway Station</strong><br>
+      Please carry your Original ID Proof. Be punctual.
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="overviewHeading">
+    <h3 id="overviewHeading">Trip Overview</h3>
+    <div class="muted" style="margin-bottom:8px">
+      <strong>Destination:</strong> Chikmagalur <br>
+      <strong>Departure Train:</strong> 12657 "MAS SBC SF MAIL" (MGR Chennai Central - KSR Bengaluru) <br>
+      <strong>Return Train:</strong> 12008 "Shatabdi Express" (KSR Bengaluru - MGR Chennai Central) <br>
+      <strong>*Click image below*</strong> to experience the magic</div>
+    <div class="gallery" id="gallery">
+
+ <img
+  src="https://www.gudlu.in/blog/wp-content/uploads/2023/03/Feature-Image-6-768x512.jpg"
+  alt="Chikmagalur Video 1"
+  data-video="https://drive.google.com/file/d/1Amcj-y6466MStZTfqb5zv5fiaERjbEzt/preview">
+
+<img
+  src="https://t4.ftcdn.net/jpg/05/29/95/43/240_F_529954361_qV0FSrDqduWQ6Xqs9OFcfSquZkmxyC7Y.jpg"
+  alt="Chikmagalur Video 2"
+  data-video="https://drive.google.com/file/d/1cu_pNfJLcWmMj20fZADG_Tlgv_6za3cJ/preview">
+
+      <img src="https://www.shutterstock.com/image-photo/beautiful-hills-cape-chikmagalur-baba-600nw-2392517341.jpg" alt="Chikmagalur 1" data-full="https://www.shutterstock.com/image-photo/beautiful-hills-cape-chikmagalur-baba-600nw-2392517341.jpg">
+      <img src="https://www.trawell.in/admin/images/upload/211744531Chikmagalur_Jhari_Falls_Main.jpg" alt="Chikmagalur 2" data-full="https://www.trawell.in/admin/images/upload/211744531Chikmagalur_Jhari_Falls_Main.jpg">
+      <img src="https://media2.thrillophilia.com/images/photos/000/213/521/original/1586776311_321.JPG?" alt="Chikmagalur 3" data-full="https://media2.thrillophilia.com/images/photos/000/213/521/original/1586776311_321.JPG?">
+      <img src="https://live.staticflickr.com/5016/5531711475_56eb3bc520_b.jpg" alt="Chikmagalur 4" data-full="https://live.staticflickr.com/5016/5531711475_56eb3bc520_b.jpg">
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="instructionsHeading">
+    <h3 id="instructionsHeading">General Instructions</h3>
+   
+       <div class="highlight-ecard">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="color:var(--primary)">Download Your One-Stop Tour Guide | E-Card</strong>
+            <button class="btn" onclick="toggleEcardList()">Download Card</button>
+        </div>
+        <div id="ecardList">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr><th>S.No</th><th>Name</th><th>E Card</th></tr>
+                    </thead>
+                    <tbody>
+ <tr><td>1.</td><td>M Velu Swamy</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('M Velu Swamy')">Download</button></td></tr>
+<tr><td>2.</td><td>Shanmugam M</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Shanmugam M')">Download</button></td></tr>
+<tr><td>3.</td><td>Stalin Chandrasekaran</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Stalin Chandrasekaran')">Download</button></td></tr>
+<tr><td>4.</td><td>M Gopi Krishnan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('M Gopi Krishnan')">Download</button></td></tr>
+<tr><td>5.</td><td>Naga Raja Kurakula</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Naga Raja Kurakula')">Download</button></td></tr>
+<tr><td>6.</td><td>Ganesh K</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Ganesh K')">Download</button></td></tr>
+<tr><td>7.</td><td>H.R. Balaji</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('H.R. Balaji')">Download</button></td></tr>
+<tr><td>8.</td><td>Hemanth Kumar K V</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Hemanth Kumar K V')">Download</button></td></tr>
+<tr><td>9.</td><td>K Gopalakrishnan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('K Gopalakrishnan')">Download</button></td></tr>
+<tr><td>10.</td><td>L. Mahadevan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('L. Mahadevan')">Download</button></td></tr>
+<tr><td>11.</td><td>Lakshmi Narasimhan Sampath</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Lakshmi Narasimhan Sampath')">Download</button></td></tr>
+<tr><td>12.</td><td>N Sriram</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('N Sriram')">Download</button></td></tr>
+<tr><td>13.</td><td>Rajiv Bhanu Nair</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Rajiv Bhanu Nair')">Download</button></td></tr>
+<tr><td>14.</td><td>S.Venkataramanan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('S.Venkataramanan')">Download</button></td></tr>
+<tr><td>15.</td><td>V Gowrishankar</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('V Gowrishankar')">Download</button></td></tr>
+<tr><td>16.</td><td>L Subramanian</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('L Subramanian')">Download</button></td></tr>
+<tr><td>17.</td><td>M. Paul Cheliyan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('M. Paul Cheliyan')">Download</button></td></tr>
+<tr><td>18.</td><td>C Andal</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('C Andal')">Download</button></td></tr>
+<tr><td>19.</td><td>Dhanam Selvakumar</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Dhanam Selvakumar')">Download</button></td></tr>
+<tr><td>20.</td><td>M.Kamali</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('M.Kamali')">Download</button></td></tr>
+<tr><td>21.</td><td>Mohana S</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Mohana S')">Download</button></td></tr>
+<tr><td>22.</td><td>P. Karpagam</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('P. Karpagam')">Download</button></td></tr>
+<tr><td>23.</td><td>A. Madhuraiveeran</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('A. Madhuraiveeran')">Download</button></td></tr>
+<tr><td>24.</td><td>Dhanush V</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Dhanush V')">Download</button></td></tr>
+<tr><td>25.</td><td>Munusamy</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Munusamy')">Download</button></td></tr>
+<tr><td>26.</td><td>Rajasekar</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Rajasekar')">Download</button></td></tr>
+<tr><td>27.</td><td>Ramanan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Ramanan')">Download</button></td></tr>
+<tr><td>28.</td><td>S. Bharath</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('S. Bharath')">Download</button></td></tr>
+<tr><td>29.</td><td>Srinivas Murthy K N</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Srinivas Murthy K N')">Download</button></td></tr>
+<tr><td>30.</td><td>Thirumalai S</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Thirumalai S')">Download</button></td></tr>
+<tr><td>31.</td><td>V. Sekar</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('V. Sekar')">Download</button></td></tr>
+<tr><td>32.</td><td>Jayanthi R</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Jayanthi R')">Download</button></td></tr>
+<tr><td>33.</td><td>D. Vijayalakshmi</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('D. Vijayalakshmi')">Download</button></td></tr>
+<tr><td>34.</td><td>Gayathri V</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Gayathri V')">Download</button></td></tr>
+<tr><td>35.</td><td>H Lavanya</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('H Lavanya')">Download</button></td></tr>
+<tr><td>36.</td><td>Harichithira B</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Harichithira B')">Download</button></td></tr>
+<tr><td>37.</td><td>Maheswari</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Maheswari')">Download</button></td></tr>
+<tr><td>38.</td><td>Parimala M</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Parimala M')">Download</button></td></tr>
+<tr><td>39.</td><td>Pingali Lakshmi Suchitra</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Pingali Lakshmi Suchitra')">Download</button></td></tr>
+<tr><td>40.</td><td>Preethi Varsha Shashi</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Preethi Varsha Shashi')">Download</button></td></tr>
+<tr><td>41.</td><td>Prema S</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Prema S')">Download</button></td></tr>
+<tr><td>42.</td><td>R.Reniya</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('R.Reniya')">Download</button></td></tr>
+<tr><td>43.</td><td>R.Uthra</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('R.Uthra')">Download</button></td></tr>
+<tr><td>44.</td><td>Rama Srivatsan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Rama Srivatsan')">Download</button></td></tr>
+<tr><td>45.</td><td>Revathi P</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Revathi P')">Download</button></td></tr>
+<tr><td>46.</td><td>Sadhana Shukla</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Sadhana Shukla')">Download</button></td></tr>
+<tr><td>47.</td><td>Sanghavi Sundaravadivelu</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Sanghavi Sundaravadivelu')">Download</button></td></tr>
+<tr><td>48.</td><td>Sasi Kala P</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Sasi Kala P')">Download</button></td></tr>
+<tr><td>49.</td><td>Srivanipriya Hariharan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Srivanipriya Hariharan')">Download</button></td></tr>
+<tr><td>50.</td><td>Sudha S</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Sudha S')">Download</button></td></tr>
+<tr><td>51.</td><td>Sahithi Priya B</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Sahithi Priya B')">Download</button></td></tr>
+<tr><td>52.</td><td>Akhshay Srinivasan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Akhshay Srinivasan')">Download</button></td></tr>
+<tr><td>53.</td><td>Deepak Thimothy Ethiraj</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Deepak Thimothy Ethiraj')">Download</button></td></tr>
+<tr><td>54.</td><td>G Bhagyaraj</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('G Bhagyaraj')">Download</button></td></tr>
+<tr><td>55.</td><td>Loganathan N</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Loganathan N')">Download</button></td></tr>
+<tr><td>56.</td><td>M.Boobathi</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('M.Boobathi')">Download</button></td></tr>
+<tr><td>57.</td><td>Manoharan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Manoharan')">Download</button></td></tr>
+<tr><td>58.</td><td>Rajesh M</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Rajesh M')">Download</button></td></tr>
+<tr><td>59.</td><td>Senthil Kumar</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Senthil Kumar')">Download</button></td></tr>
+<tr><td>60.</td><td>V Raghuraman</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('V Raghuraman')">Download</button></td></tr>
+<tr><td>61.</td><td>V Vishnuvardhan</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('V Vishnuvardhan')">Download</button></td></tr>
+<tr><td>62.</td><td>Vikram N K</td><td><button class="btn"style="padding:4px 8px; font-size:0.75rem" onclick="generateATMCard('Vikram N K')">Download</button></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+   
+   
+   
+   
+    <ul style="margin-top:8px; padding-left:18px; color:var(--text); line-height:1.5">
+      <li>Bring travel necessities like toothbrush & paste, sufficient clothes, sweater, muffler, water bottle etc.</li>
+      <li>Carry <strong>Original ID Proof</strong> (Aadhar / Voter ID / Driving Licence).</li>
+      <li>Those who are under medications are requested to bring required medicines.</li>
+      <li>Carry electronic gadgets like mobile charger, camera to record special moments.</li>
+      <li>All valuable things to be kept safely.</li>
+      <li>Consumption of alcohol / prohibited drugs is strictly prohibited.</li>
+      <li>Everyone should follow the timing schedule strictly throughout the trip.</li>
+      <li>Kindly follow the instructions provided by the coordinators.</li>
+    </ul>
+  </section>
+
+  <section class="card" id="navigatorSection" aria-labelledby="navigatorHeading">
+    <h3 id="navigatorHeading">Information Navigator</h3>
+
+    <div class="nav-block">
+      <div class="search" role="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:0.7"><path d="M21 21l-4.35-4.35" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="11" cy="11" r="6" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></circle></svg>
+        <input id="searchInput" type="search" placeholder="Search by name, coach, seat…" aria-label="Search tickets">
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
+        <button id="clearSearch" class="btn btn-ghost" style="background:transparent; border:1px solid rgba(0,0,0,0.06); color:var(--primary); font-weight:800">Clear Search</button>
+
+        <div style="flex:1; min-width:160px">
+          <select id="viewSelect" aria-label="Select information view">
+            <option value="schedule">Schedule</option>
+            <option value="onward">Onward Tickets</option>
+            <option value="bus_no">Bus_No</option>
+            <option value="roompair">Room Pairing</option>
+            <option value="return">Return Tickets</option>
+                                  </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="mainContent" style="margin-top:14px"></div>
+  </section>
+
+  <section class="card" aria-labelledby="coordsHeading">
+    <h3 id="coordsHeading">Contacts</h3>
+    
+    <div style="margin-bottom:15px;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+        <span style="font-size:1.1rem;">🏨</span>
+        <strong style="color:var(--primary)">Stay Venue</strong>
+      </div>
+      <a href="tel:+919481775018" style="text-decoration:none; font-weight:700; color:var(--text); margin-left:28px;">9481775018</a>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr; gap:12px; margin-bottom:20px;">
+      <div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:700;">Basic Medical Support</div>
+        <div style="font-weight:700;">Ms.Sanghavi <span style="font-weight:400; font-size:0.85rem; color:var(--muted);">("Care first, fun always!" ❤️😄)</span></div>
+        <a href="tel:+917401777009" style="font-size:0.9rem; color:var(--accent); text-decoration:none;">7401777009</a>
+      </div>
+
+      <div>
+        <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:700;">Admin Support</div>
+        <div style="font-weight:700;">Mr. Boobathi & Mr. Vikram <span style="font-weight:400; font-size:0.85rem; color:var(--muted);">("We manage, you enjoy!" 📋✨)</span></div>
+        <a href="tel:+917373236663" style="font-size:0.9rem; color:var(--accent); text-decoration:none;">7373236663</a> / <a href="tel:+919710095117" style="font-size:0.9rem; color:var(--accent); text-decoration:none;">9710095117</a>
+      </div>
+    </div>
+
+    <h4 style="margin:15px 0 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top:15px; color:var(--primary)">Tour Coordination Team</h4>
+    
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap:15px;">
+      
+      <div style="background:rgba(59,130,246,0.05); padding:10px; border-radius:8px;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--muted)">Trip Mentor 🌟</div>
+        <div style="font-weight:700;">Mr. Sriram<small>("Leading the way!" 🚀😄)</small></div>
+        <a href="tel:+919343463733" style="text-decoration:none; color:var(--accent); font-weight:600;">93434 63733</a>
+      </div>
+
+      <div style="background:rgba(59,130,246,0.05); padding:10px; border-radius:8px;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--muted)">Organizer  🗺️</div>
+        <div style="font-weight:700;">Mr. Veluswamy <small>("Master Plan done, fun on!" 🧭🎉)</small></div>
+        <a href="tel:+919515555579" style="text-decoration:none; color:var(--accent); font-weight:600;">95155 55579</a>
+      </div>
+
+      <div style="background:rgba(59,130,246,0.05); padding:10px; border-radius:8px;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--muted)">Cameraman  📸</div>
+        <div style="font-weight:700;">Mr. Manoharan <small>("Memory Maker - Capturing smiles nonstop!" 😄📷)</small></div>
+        <a href="tel:+919094812549" style="text-decoration:none; color:var(--accent); font-weight:600;">90948 12549</a>
+      </div>
+
+      <div style="background:rgba(59,130,246,0.05); padding:10px; border-radius:8px;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--muted)">HO Team Coordinator  🏢✈️</div>
+        <div style="font-weight:700;">Mrs. Uthra <small>("Captain - vibes ON!" ✈️🎉)</small></div>
+        <a href="tel:+919962912554" style="text-decoration:none; color:var(--accent); font-weight:600;">99629 12554</a>
+      </div>
+
+      <div style="background:rgba(59,130,246,0.05); padding:10px; border-radius:8px;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--muted)">CWH Team Coordinator 📦✈️</div>
+        <div style="font-weight:700;">Mr. Sekar <small>("Captain - vibes ON!" ✈️🎉)</small></div>
+        <a href="tel:+918056657113" style="text-decoration:none; color:var(--accent); font-weight:600;">80566 57113</a>
+      </div>
+
+       <div style="background:rgba(59,130,246,0.05); padding:10px; border-radius:8px;">
+        <div style="font-size:0.75rem; font-weight:800; color:var(--muted)">Trip Support Lead 🧭</div>
+        <div style="font-weight:700;">Mr. Shanmugam M <small>("Keeping everything on track!" 😄✔️)</small></div>
+        <a href="tel:+919445484551" style="text-decoration:none; color:var(--accent); font-weight:600;">94454 84551</a>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <section class="card" id="roomPairingCard" style="display:none">
+    <h3>Room Pairing</h3>
+    <p class="muted">Rooms are allocated based on the number of occupants accommodated, as per the room type</p>
+    <div id="roomPairsArea" style="margin-top:8px"></div>
+  </section>
+
+</div>
+
+<div class="lightbox" id="lightbox">
+  <iframe
+    id="lightboxFrame"
+    style="width:90%; height:80%; border-radius:12px; border:0;"
+    allow="autoplay"
+    allowfullscreen>
+  </iframe>
+  <img id="lightboxImg" style="max-width:90%; max-height:85%; border-radius:8px; display:none;">
+</div>
+
+
+<div class="footer-block" id="footerBlock" role="contentinfo" aria-label="Footer actions and help">
+  <div class="footer-buttons" role="navigation" aria-label="Footer buttons">
+    <div class="footer-item" data-action="schedule">Schedule</div>
+    <div class="footer-item" data-action="onward">Onward</div>
+    <div class="footer-item" data-action="bus_no">Bus No</div>
+    <div class="footer-item" data-action="roompair">Room No</div>
+    <div class="footer-item" data-action="return">Return</div>
+    </div>
+  <div class="footer-help">
+    Shield Wish You Happy & Safe Journey to Chalo Chikmagalur
+  </div>
+</div>
+
+<script>
+/* ========================
+   LIVE TIMER LOGIC
+   ======================== */
+const tourTargetDate = new Date("Jan 3, 2026 22:15:00").getTime();
+
+function updateTourTimer() {
+    const now = new Date().getTime();
+    const distance = tourTargetDate - now;
+
+    if (distance < 0) {
+        document.getElementById("banner-days").innerHTML = "0 Days to Go";
+        document.getElementById("banner-live").innerHTML = "DEPARTED";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const totalHours = Math.floor(distance / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const displayHrs = totalHours.toString().padStart(2, '0');
+    const displayMins = minutes.toString().padStart(2, '0');
+    const displaySecs = seconds.toString().padStart(2, '0');
+
+    document.getElementById("banner-days").innerHTML = days + " Days to Go";
+    document.getElementById("banner-live").innerHTML = `${displayHrs}:${displayMins}:${displaySecs}`;
+}
+setInterval(updateTourTimer, 1000);
+updateTourTimer();
+
+/* =============
+   Existing JS Data & Logic
+   ============= */
+   
+// Bus Provision Data
+const busAllocation = [
+{ sno:1, name: "M Velu Swamy", busNo: "Bus No.1" },
+{ sno:2, name: "Shanmugam M", busNo: "Bus No.1" },
+{ sno:3, name: "Stalin Chandrasekaran", busNo: "Bus No.1" },
+{ sno:4, name: "M Gopi Krishnan", busNo: "Bus No.1" },
+{ sno:5, name: "Naga Raja Kurakula", busNo: "Bus No.1" },
+{ sno:6, name: "Ganesh K", busNo: "Bus No.1" },
+{ sno:7, name: "H.R. Balaji", busNo: "Bus No.1" },
+{ sno:8, name: "Hemanth Kumar K V", busNo: "Bus No.1" },
+{ sno:9, name: "K Gopalakrishnan", busNo: "Bus No.1" },
+{ sno:10, name: "L. Mahadevan", busNo: "Bus No.1" },
+{ sno:11, name: "Lakshmi Narasimhan Sampath", busNo: "Bus No.1" },
+{ sno:12, name: "N Sriram", busNo: "Bus No.1" },
+{ sno:13, name: "Rajiv Bhanu Nair", busNo: "Bus No.1" },
+{ sno:14, name: "S.Venkataramanan", busNo: "Bus No.1" },
+{ sno:15, name: "V Gowrishankar", busNo: "Bus No.1" },
+{ sno:16, name: "L Subramanian", busNo: "Bus No.1" },
+{ sno:17, name: "M. Paul Cheliyan", busNo: "Bus No.1" },
+{ sno:18, name: "C Andal", busNo: "Bus No.1" },
+{ sno:19, name: "Dhanam Selvakumar", busNo: "Bus No.1" },
+{ sno:20, name: "M.Kamali", busNo: "Bus No.1" },
+{ sno:21, name: "Mohana S", busNo: "Bus No.1" },
+{ sno:22, name: "P. Karpagam", busNo: "Bus No.1" },
+{ sno:23, name: "A. Madhuraiveeran", busNo: "Bus No.1" },
+{ sno:24, name: "Dhanush V", busNo: "Bus No.1" },
+{ sno:25, name: "Munusamy", busNo: "Bus No.1" },
+{ sno:26, name: "Rajasekar", busNo: "Bus No.1" },
+{ sno:27, name: "Ramanan", busNo: "Bus No.1" },
+{ sno:28, name: "S. Bharath", busNo: "Bus No.1" },
+{ sno:29, name: "Srinivas Murthy K N", busNo: "Bus No.1" },
+{ sno:30, name: "Thirumalai S", busNo: "Bus No.1" },
+{ sno:31, name: "V. Sekar", busNo: "Bus No.1" },
+{ sno:32, name: "Jayanthi R", busNo: "Bus No.2" },
+{ sno:33, name: "D. Vijayalakshmi", busNo: "Bus No.2" },
+{ sno:34, name: "Gayathri V", busNo: "Bus No.2" },
+{ sno:35, name: "H Lavanya", busNo: "Bus No.2" },
+{ sno:36, name: "Harichithira B", busNo: "Bus No.2" },
+{ sno:37, name: "Maheswari", busNo: "Bus No.2" },
+{ sno:38, name: "Parimala M", busNo: "Bus No.2" },
+{ sno:39, name: "Pingali Lakshmi Suchitra", busNo: "Bus No.2" },
+{ sno:40, name: "Preethi Varsha Shashi", busNo: "Bus No.2" },
+{ sno:41, name: "Prema S", busNo: "Bus No.2" },
+{ sno:42, name: "R.Reniya", busNo: "Bus No.2" },
+{ sno:43, name: "R.Uthra", busNo: "Bus No.2" },
+{ sno:44, name: "Rama Srivatsan", busNo: "Bus No.2" },
+{ sno:45, name: "Revathi P", busNo: "Bus No.2" },
+{ sno:46, name: "Sadhana Shukla", busNo: "Bus No.2" },
+{ sno:47, name: "Sanghavi Sundaravadivelu", busNo: "Bus No.2" },
+{ sno:48, name: "Sasi Kala P", busNo: "Bus No.2" },
+{ sno:49, name: "Srivanipriya Hariharan", busNo: "Bus No.2" },
+{ sno:50, name: "Sudha S", busNo: "Bus No.2" },
+{ sno:51, name: "Sahithi Priya B", busNo: "Bus No.2" },
+{ sno:52, name: "Akhshay Srinivasan", busNo: "Bus No.2" },
+{ sno:53, name: "Deepak Thimothy Ethiraj", busNo: "Bus No.2" },
+{ sno:54, name: "G Bhagyaraj", busNo: "Bus No.2" },
+{ sno:55, name: "Loganathan N", busNo: "Bus No.2" },
+{ sno:56, name: "M.Boobathi", busNo: "Bus No.2" },
+{ sno:57, name: "Manoharan", busNo: "Bus No.2" },
+{ sno:58, name: "Rajesh M", busNo: "Bus No.2" },
+{ sno:59, name: "Senthil Kumar", busNo: "Bus No.2" },
+{ sno:60, name: "V Raghuraman", busNo: "Bus No.2" },
+{ sno:61, name: "V Vishnuvardhan", busNo: "Bus No.2" },
+{ sno:62, name: "Vikram N K", busNo: "Bus No.2" }
+];   
+   
+const onwardAllocation = [
+{ sno: 1, name: "V Gowrishankar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 2, name: "M. Paul Cheliyan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 3, name: "Srinivas Murthy K N", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 4, name: "Lakshmi Narasimhan Sampath", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 5, name: "Rajiv Bhanu Nair", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 6, name: "L. Mahadevan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 7, name: "L Subramanian", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 8, name: "Ganesh K", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 9, name: "Naga Raja Kurakula", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 10, name: "Hemanth Kumar K V", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 11, name: "H.R. Balaji", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 12, name: "K Gopalakrishnan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 13, name: "Dhanush V", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 14, name: "Senthil Kumar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 15, name: "V Vishnuvardhan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 16, name: "S.Venkataramanan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 17, name: "Loganathan N", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 18, name: "M Gopi Krishnan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 19, name: "N Sriram", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 20, name: "Stalin Chandrasekaran", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 21, name: "S. Bharath", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 22, name: "V. Sekar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 23, name: "A. Madhuraiveeran", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 24, name: "Munusamy", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 25, name: "Rajasekar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 26, name: "Thirumalai S", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 27, name: "Ramanan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 28, name: "C Andal", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 29, name: "R.Reniya", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 30, name: "R.Uthra", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 31, name: "D. Vijayalakshmi", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 32, name: "Sasi Kala P", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 33, name: "Sanghavi Sundaravadivelu", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 34, name: "Prema S", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 35, name: "H Lavanya", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 36, name: "Sudha S", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 37, name: "Revathi P", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 38, name: "Pingali Lakshmi Suchitra", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 39, name: "Rama Srivatsan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 40, name: "Preethi Varsha Shashi", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 41, name: "Maheswari", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 42, name: "Sadhana Shukla", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 43, name: "Gayathri V", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 44, name: "Srivanipriya Hariharan", coach:"B3/B4/B4", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 45, name: "Harichithira B", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 46, name: "M.Kamali", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 47, name: "P. Karpagam", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 48, name: "Dhanam Selvakumar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 49, name: "Mohana S", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 50, name: "Parimala M", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 51, name: "Shanmugam M", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 52, name: "M Velu Swamy", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 53, name: "M.Boobathi", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 54, name: "Deepak Thimothy Ethiraj", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 55, name: "Akhshay Srinivasan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 56, name: "Manoharan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 57, name: "G Bhagyaraj", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 58, name: "Rajesh M", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 59, name: "V Raghuraman", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 60, name: "Vikram N K", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 61, name: "Sahithi Priya B", coach:"B5_HYD", seat:"32", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 62, name: "Jayanthi R", coach:"NA", seat:"NA", status: "Confirmed", ticketLink: "NA" }
+];
+
+const returnAllocation = [
+ { sno: 1, name: "L Subramanian", coach:"C6", seat:"1", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 2, name: "Dhanush V", coach:"C6", seat:"3", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 3, name: "C Andal", coach:"C6", seat:"4", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 4, name: "Shanmugam M", coach:"C6", seat:"10", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 5, name: "M Velu Swamy", coach:"C6", seat:"11", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 6, name: "R.Reniya", coach:"C6", seat:"12", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 7, name: "R.Uthra", coach:"C6", seat:"13", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 8, name: "D. Vijayalakshmi", coach:"C6", seat:"14", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 9, name: "Sasi Kala P", coach:"C6", seat:"15", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 10, name: "Sanghavi Sundaravadivelu", coach:"C6", seat:"16", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 11, name: "Prema S", coach:"C6", seat:"17", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 12, name: "H Lavanya", coach:"C6", seat:"18", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 13, name: "Sudha S", coach:"C6", seat:"19", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 14, name: "Revathi P", coach:"C6", seat:"20", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 15, name: "Pingali Lakshmi Suchitra", coach:"C6", seat:"21", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 16, name: "Rama Srivatsan", coach:"C6", seat:"22", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 17, name: "Preethi Varsha Shashi", coach:"C6", seat:"24", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 18, name: "Maheswari", coach:"C6", seat:"25", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 19, name: "Sadhana Shukla", coach:"C6", seat:"26", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 20, name: "Gayathri V", coach:"C6", seat:"27", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 21, name: "Srivanipriya Hariharan", coach:"C6", seat:"28", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 22, name: "Harichithira B", coach:"C6", seat:"29", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 23, name: "M.Boobathi", coach:"C6", seat:"30", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 24, name: "Deepak Thimothy Ethiraj", coach:"C6", seat:"32", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 25, name: "Akhshay Srinivasan", coach:"C6", seat:"33", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 26, name: "Manoharan", coach:"C6", seat:"34", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 27, name: "G Bhagyaraj", coach:"C6", seat:"35", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 28, name: "Rajesh M", coach:"C6", seat:"36", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 29, name: "V Raghuraman", coach:"C6", seat:"37", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 30, name: "Vikram N K", coach:"C6", seat:"38", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 31, name: "Senthil Kumar", coach:"C6", seat:"39", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 32, name: "V Vishnuvardhan", coach:"C6", seat:"40", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 33, name: "V Gowrishankar", coach:"C6", seat:"42", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 34, name: "M. Paul Cheliyan", coach:"C6", seat:"43", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 35, name: "Srinivas Murthy K N", coach:"C6", seat:"44", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 36, name: "Lakshmi Narasimhan Sampath", coach:"C6", seat:"45", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 37, name: "S.Venkataramanan", coach:"C6", seat:"46", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 38, name: "Loganathan N", coach:"C6", seat:"47", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 39, name: "M Gopi Krishnan", coach:"C6", seat:"48", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 40, name: "N Sriram", coach:"C6", seat:"49", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 41, name: "Stalin Chandrasekaran", coach:"C6", seat:"50", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 42, name: "M.Kamali", coach:"C6", seat:"51", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 43, name: "P. Karpagam", coach:"C6", seat:"52", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 44, name: "S. Bharath", coach:"C6", seat:"53", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 45, name: "V. Sekar", coach:"C6", seat:"54", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 46, name: "A. Madhuraiveeran", coach:"C6", seat:"55", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 47, name: "Munusamy", coach:"C6", seat:"56", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 48, name: "Rajasekar", coach:"C6", seat:"57", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 49, name: "Dhanam Selvakumar", coach:"C6", seat:"58", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 50, name: "Thirumalai S", coach:"C6", seat:"59", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 51, name: "Ramanan", coach:"C6", seat:"60", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 52, name: "Mohana S", coach:"C6", seat:"62", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 53, name: "Ganesh K", coach:"C6", seat:"63", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 54, name: "Naga Raja Kurakula", coach:"C6", seat:"64", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 55, name: "Parimala M", coach:"C6", seat:"65", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 56, name: "Hemanth Kumar K V", coach:"C6", seat:"66", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 57, name: "Rajiv Bhanu Nair", coach:"C6", seat:"67", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 58, name: "H.R. Balaji", coach:"C6", seat:"69", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 59, name: "K Gopalakrishnan", coach:"C6", seat:"70", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 60, name: "Sahithi Priya B", coach:"B4(Hyd)", seat:"70", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 61, name: "L. Mahadevan", coach:"C6", seat:"78", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 62, name: "Jayanthi R", coach:"NA", seat:"NA", status: "Confirmed", ticketLink: "NA" }
+];
+
+const schedule = [
+  { day:"Day 1 -- Sunday, 4th Jan", activities:["Fresh up","Breakfast","Belur & Halebidu Visit","Lunch","Check-in & Campfire","Dinner"] },
+  { day:"Day 2 -- Monday, 5th Jan", activities:["Breakfast","Mullayyanagiri Peak Visit (trekking shoes may be required)","Lunch","Jhari Waterfalls & Sightseeing","Campfire & Dinner"] },
+  { day:"Day 3 -- Tuesday, 6th Jan", activities:["Breakfast","Checkout & Local Shopping","Lunch","Departure to Railway Station","Dinner at train"] }
+];
+
+const roomPairings = [
+{ room:"CMK_Room 1", occupants:["Ganesh K, Hemanth Kumar K V, Lakshmi Narasimhan Sampath, N Sriram, Naga Raja Kurakula, Rajiv Bhanu Nair & V Gowrishankar"] },
+{ room:"CMK_Room 2", occupants:["Gayathri V, Pingali Lakshmi Suchitra, Preethi Varsha Shashi, Rama Srivatsan & Sadhana Shukla"] },
+{ room:"CMK_Room 3", occupants:["K Gopalakrishnan, L Subramanian, M Gopi Krishnan, M. Paul Cheliyan, S.Venkataramanan & Stalin Chandrasekaran"] },
+{ room:"CMK_Room 4", occupants:["H.R. Balaji & L. Mahadevan"] },
+{ room:"Good Earth_Room 1", occupants:["C Andal, Dhanam Selvakumar, M.Kamali, Mohana S, P. Karpagam & Prema S"] },
+{ room:"Good Earth_Room 2", occupants:["Akhshay Srinivasan, Deepak Thimothy Ethiraj, Dhanush V, M.Boobathi, S. Bharath & Shanmugam M"] },
+{ room:"Good Earth_Room 3", occupants:["D. Vijayalakshmi, Sanghavi Sundaravadivelu & Sasi Kala P"] },
+{ room:"Good Earth_Room 4", occupants:["H Lavanya, Jayanthi R & Sahithi Priya B"] },
+{ room:"Good Earth_Room 5", occupants:["Parimala M & Sudha S"] },
+{ room:"Good Earth_Room 6", occupants:["Rajasekar & Thirumalai S"] },
+{ room:"Good Earth_Room 7", occupants:["V Raghuraman & M Velu Swamy"] },
+{ room:"Good Earth_Room 8", occupants:["Munusamy, Srinivas Murthy K N, V. Sekar & Loganathan N"] },
+{ room:"Tent Stay - Disclaimer", occupants:["Tent stay allocation is tentative and based on availability and participants' interest. The allocation may change for Day 1 and Day 2"] },
+{ room:"Tent 1", occupants:["Harichithira B(GE_Room 3) & Maheswari(GE_Room 3)"] },
+{ room:"Tent 2", occupants:["R.Reniya(GE_Room 4) & R.Uthra(GE_Room 4)"] },
+{ room:"Tent 3", occupants:["Revathi P(GE_Room 5) & Srivanipriya Hariharan(GE_Room 5)"] },
+{ room:"Tent 4", occupants:["G Bhagyaraj(GE_Room 6) & Manoharan(GE_Room 6)"] },
+{ room:"Tent 5", occupants:["A. Madhuraiveeran(GE_Room 2) & Ramanan(GE_Room 7)"] },
+{ room:"Tent 6", occupants:["Rajesh M(GE_Room 6) & Vikram N K(GE_Room 8)"] },
+{ room:"Tent 7", occupants:["Senthil Kumar(GE_Room 8) & V Vishnuvardhan(GE_Room 8)"] },
+{ room:"Remarks", occupants:["Tent stay allocation is tentative and based on availability and participants' interest. The allocation may change for Day 1 and Day 2"] }
+];
+
+
+
+
+
+
+/* ========================
+   ATM CARD PDF GENERATOR
+   ======================== */
+function toggleEcardList() {
+    const list = document.getElementById('ecardList');
+    list.style.display = list.style.display === 'block' ? 'none' : 'block';
+}
+
+
+
+function generateATMCard(userName) {
+    // 1. TRY TO PLAY THE AUDIO IMMEDIATELY
+    const audio = document.getElementById('tourAudio');
+    if (audio) {
+        audio.currentTime = 0; // Restart sound if user clicks multiple times
+        audio.play().catch(error => {
+            console.error("Playback failed. Browsers require a click to play audio:", error);
+        });
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('l', 'mm', [150, 95]);
+
+    // Find User Data
+    const bus = busAllocation.find(b => b.name === userName) || { busNo: 'TBA' };
+    const onward = onwardAllocation.find(o => o.name === userName) || { coach: 'TBA', seat: 'TBA' };
+    const ret = returnAllocation.find(r => r.name === userName) || { coach: 'TBA', seat: 'TBA' };
+    const room = roomPairings.find(rp => rp.occupants.some(occ => occ.includes(userName))) || { room: 'TBA', occupants: [] };
+
+    // --- PAGE 1: FRONT SIDE ---
+    doc.setDrawColor(30, 58, 138);
+    doc.setFillColor(248, 250, 252);
+    doc.roundedRect(5, 5, 140, 85, 5, 5, 'FD');
+
+    // Header
+    doc.setFillColor(30, 58, 138);
+    doc.rect(5, 10, 140, 15, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("CHALO CHIKMAGALUR", 75, 17, { align: "center" });
+    doc.setFontSize(10);
+    doc.text("Your One-Stop Tour Guide | E-Card", 75, 22, { align: "center" });
+
+    // Personal Info
+    doc.setTextColor(30, 58, 138);
+    doc.setFontSize(10);
+    doc.text("NAME:", 15, 35);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "bold");
+    doc.text(userName.toUpperCase(), 40, 35);
+
+    doc.setTextColor(30, 58, 138);
+    doc.setFont("helvetica", "normal");
+    doc.text("BUS NO:", 15, 45);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "bold");
+    doc.text(bus.busNo, 40, 45);
+
+    // Room Section with Guest Names (Small & Normal Font)
+    doc.setTextColor(30, 58, 138);
+    doc.setFont("helvetica", "normal");
+    doc.text("ROOM NO:", 65, 45); 
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "bold");
+    doc.text(room.room, 85, 45); 
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(5.5); 
+    const guestListText = `(Guest: ${room.occupants.join(", ")})`;
+    const wrappedNames = doc.splitTextToSize(guestListText, 58); 
+    doc.text(wrappedNames, 85, 48); 
+
+    // Travel Details
+    doc.setDrawColor(200, 200, 200);
+    doc.roundedRect(12, 55, 126, 26, 3, 3, 'S');
+    doc.setFontSize(9);
+    doc.setTextColor(30, 58, 138);
+    doc.text("ONWARD (Train)", 15, 61);
+    doc.text("RETURN (Train)", 80, 61);
+
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(8);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Coach/Seat: ${onward.coach} / ${onward.seat}`, 15, 68);
+    doc.text(`Status: ${onward.status || 'Confirmed'}`, 15, 74);
+    doc.text(`Coach/Seat: ${ret.coach} / ${ret.seat}`, 80, 68);
+    doc.text(`Status: ${ret.status || 'Confirmed'}`, 80, 74);
+
+    // Footer message
+    doc.setFontSize(7);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Shield Wish You Happy & Safe Journey to Chalo Chikmagalur", 75, 87, { align: "center" });
+
+    // --- PAGE 2: INSTRUCTIONS ---
+    
+       // --- PAGE 2: BACK SIDE (INSTRUCTIONS & TEAM) ---
+    doc.addPage();
+    
+    // Background
+    doc.setDrawColor(30, 58, 138);
+    doc.setFillColor(248, 250, 252);
+    doc.roundedRect(5, 5, 140, 85, 5, 5, 'FD');
+
+    // Header for Instructions
+    doc.setFillColor(30, 58, 138);
+    doc.rect(5, 5, 140, 10, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "bold");
+    doc.text("GENERAL INSTRUCTIONS", 75, 11.5, { align: "center" });
+
+    // Full Instructions from Home Screen
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(6.5);
+    doc.setFont("helvetica", "normal");
+    const inst = [
+        "1. Bring travel necessities like toothbrush & paste, sufficient clothes, sweater, muffler, water bottle etc.",
+        "2. Carry Original ID Proof (Aadhar / Voter ID / Driving Licence).",
+        "3. Those who are under medications are requested to bring required medicines.",
+        "4. Carry electronic gadgets like mobile charger, camera to record special moments.",
+        "5. All valuable things to be kept safely.",
+        "6. Consumption of alcohol / prohibited drugs is strictly prohibited.",
+        "7. Everyone should follow the timing schedule strictly throughout the trip.",
+        "8. Kindly follow the instructions provided by the coordinators."
+    ];
+    let yPos = 20;
+    inst.forEach(line => {
+        // Simple text wrapping if a line is too long
+        const splitLine = doc.splitTextToSize(line, 130);
+        doc.text(splitLine, 10, yPos);
+        yPos += (splitLine.length * 3.5);
+    });
+
+    // Coordination Team Section
+    doc.setDrawColor(30, 58, 138);
+    doc.line(10, 48, 140, 48);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(30, 58, 138);
+    doc.setFontSize(8.5);
+    doc.text("TOUR COORDINATION TEAM", 75, 53, { align: "center" });
+
+    // Detailed Team Members (mimicking Home Screen style)
+    doc.setFontSize(6.5);
+    const team = [
+        { role: "Trip Mentor ", name: "Mr. Sriram", quote: '("Leading the way!" )', phone: "93434 63733" },
+        { role: "Organizer ", name: "Mr. Veluswamy", quote: '("Master Plan done, fun on!" )', phone: "95155 55579" },
+        { role: "Cameraman ", name: "Mr. Manoharan", quote: '("Memory Maker - Capturing smiles!" )', phone: "90948 12549" },
+        { role: "HO Team Coordinator ", name: "Mrs. Uthra", quote: '("Captain - vibes ON!" )', phone: "99629 12554" },
+        { role: "CWH Team Coordinator ", name: "Mr. Sekar", quote: '("Captain - vibes ON!" )', phone: "80566 57113" },
+        { role: "Trip Support Lead ", name: "Mr. Shanmugam M", quote: '("Keeping everything on track!" )', phone: "94454 84551" }
+    ];
+
+    let ty = 58;
+    let tx = 10;
+    team.forEach((member, i) => {
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(100, 100, 100);
+        doc.text(member.role, tx, ty);
+        
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(0, 0, 0);
+        doc.text(member.name, tx, ty + 3);
+        
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(5.5);
+        doc.text(member.quote, tx, ty + 5.5);
+        
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(30, 58, 138);
+        doc.setFontSize(6.5);
+        doc.text(member.phone, tx, ty + 8.5);
+
+        if ((i + 1) % 3 === 0) {
+            tx = 10;
+            ty += 13;
+        } else {
+            tx += 46;
+        }
+    });
+
+    doc.save(`ECard_${userName.replace(' ', '_')}.pdf`);
+}
+    
+    
+    
+    
+
+
+const viewSelect = document.getElementById('viewSelect');
+const searchInput = document.getElementById('searchInput');
+const clearSearch = document.getElementById('clearSearch');
+const mainContent = document.getElementById('mainContent');
+const roomPairingCard = document.getElementById('roomPairingCard');
+const roomPairsArea = document.getElementById('roomPairsArea');
+const lightbox = document.getElementById('lightbox');
+const lightboxFrame = document.getElementById('lightboxFrame');
+const lightboxImg = document.getElementById('lightboxImg');
+const footerBlock = document.getElementById('footerBlock');
+
+
+function matchesFilter(member, q){
+  if(!q) return true;
+  q=q.trim().toLowerCase();
+  return String(member.name).toLowerCase().includes(q) ||
+         String(member.coach).toLowerCase().includes(q) ||
+         String(member.seat).toLowerCase().includes(q) ||
+         String(member.sno).toLowerCase().includes(q);
+}
+
+
+function renderSchedule(){
+  let html = '<h3>Trip Schedule</h3>';
+  schedule.forEach(s=>{
+    html += `<div style="margin-top:8px"><strong>${s.day}</strong><ul style="margin:8px 0 0 18px">`;
+    s.activities.forEach(a=> html += `<li style="margin-bottom:6px">${a}</li>`);
+    html += '</ul></div>';
+  });
+  mainContent.innerHTML = html;
+  roomPairingCard.style.display = 'none';
+}
+
+function renderBusTable(){
+  const q = (searchInput.value || '').toLowerCase();
+  const filtered = busAllocation.filter(b => b.name.toLowerCase().includes(q) || b.busNo.toLowerCase().includes(q));
+
+  let html = `<h3>Bus Assignments <button id="exportBus" class="btn" style="float:right; padding:4px 8px; font-size:0.75rem">CSV</button></h3>`;
+  html += '<div class="table-scroll"><table><thead><tr><th>S.No</th><th>Name</th><th>Bus No.</th></tr></thead><tbody>';
+  filtered.forEach(b => {
+    html += `<tr><td>${b.sno}</td><td>${b.name}</td><td>${b.busNo}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  mainContent.innerHTML = html;
+  roomPairingCard.style.display = 'none';
+  
+  document.getElementById('exportBus').onclick = () => {
+    const csv = "S.No,Name,Bus No.\n" + filtered.map(b => `${b.sno},"${b.name}","${b.busNo}"`).join("\n");
+    downloadBlob(csv, "bus_allocation.csv", "text/csv;charset=utf-8;");
+  };
+}
+
+
+function renderTicketTable(list, title){
+  const q = (searchInput.value || '').trim().toLowerCase();
+  const filtered = list.filter(m => matchesFilter(m, q));
+
+  let html = `<div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
+                <h3 style="margin:0">${title} <small style="color:var(--muted); font-weight:700; margin-left:8px">${filtered.length}/${list.length}</small></h3>
+                <div style="display:flex; gap:8px; align-items:center">
+                  <button id="exportCsv" class="btn">Export CSV</button>
+                </div>
+              </div>`;
+
+  html += '<div class="table-scroll"><table><thead><tr><th style="min-width:48px">S.No</th><th style="min-width:200px">Name</th><th>Coach</th><th>Seat</th><th>Status</th><th>Ticket</th></tr></thead><tbody>';
+
+  if(filtered.length === 0){
+    html += `<tr><td colspan="6" style="padding:18px; color:var(--muted)">No records match your search.</td></tr>`;
+  } else {
+    filtered.forEach(m=>{
+      html += `<tr data-sno="${m.sno}" data-coach="${m.coach}" data-seat="${m.seat}">
+                <td>${m.sno}</td>
+                <td style="min-width:200px">${m.name}</td>
+                <td>${m.coach}</td>
+                <td>${m.seat}</td>
+                <td><span class="status confirm">${m.status}</span></td>
+                <td>
+  <a href="javascript:void(0)"
+     class="btn"
+     style="padding:6px 10px; font-size:0.88rem"
+     onclick="showTicketDisabledMessage(event)">
+     Download
+  </a>
+</td>
+
+                 </tr>`;
+    });
+  }
+
+  html += '</tbody></table></div>';
+  mainContent.innerHTML = html;
+  roomPairingCard.style.display = 'none';
+
+  document.getElementById('exportCsv').addEventListener('click', ()=>{
+    const csv = toCSV(filtered);
+    downloadBlob(csv, `${title.replace(/\s+/g,'_').toLowerCase()}.csv`, 'text/csv;charset=utf-8;');
+  });
+}
+
+function toCSV(arr){
+  const keys = ['sno','name','coach','seat','status','ticketLink'];
+  const header = keys.join(',') + '\n';
+  const rows = arr.map(o => keys.map(k => `"${String(o[k]||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  return header + rows;
+}
+function downloadBlob(content, filename, type){
+  const blob = new Blob([content], {type});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 500);
+}
+
+function renderRoomPairing(){
+  roomPairingCard.style.display = 'block';
+  roomPairingCard.scrollIntoView({behavior:'smooth'});
+  let html = '<div style="display:flex; flex-direction:column; gap:8px">';
+  roomPairings.forEach(r=>{
+    html += `<div style="padding:8px; border-radius:8px; background:var(--glass); display:flex; justify-content:space-between; align-items:center;">
+      <div><strong>${r.room}</strong><div style="color:var(--muted); font-size:0.93rem">${r.occupants.join(', ')}</div></div>
+    </div>`;
+  });
+  html += '</div>';
+  roomPairsArea.innerHTML = html;
+  mainContent.innerHTML = '';
+}
+
+function showView(view){
+  if(view === 'schedule') renderSchedule();
+  else if(view === 'onward') renderTicketTable(onwardAllocation, 'Onward Tickets (This is a tentative allocation. Train coach and seat numbers will be updated in the final version, which will be shared two days before the trip) Train 12657');
+  else if(view === 'return') renderTicketTable(returnAllocation, 'Return Tickets (This is a tentative allocation. Train coach and seat numbers will be updated in the final version, which will be shared two days before the trip) Train 12008');
+  else if(view === 'bus_no') renderBusTable();
+  else if(view === 'roompair') renderRoomPairing();
+}
+
+viewSelect.addEventListener('change', ()=> showView(viewSelect.value));
+searchInput.addEventListener('input', ()=> showView(viewSelect.value));
+clearSearch.addEventListener('click', ()=> { searchInput.value=''; showView(viewSelect.value); });
+
+/* ========================
+   CORRECTED GALLERY LOGIC
+   ======================== */
+document.querySelectorAll('#gallery img').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    const videoSrc = img.getAttribute('data-video');
+    const fullImgSrc = img.getAttribute('data-full');
+
+    lightbox.style.display = 'flex';
+    
+    // Reset displays
+    lightboxFrame.style.display = 'none';
+    lightboxImg.style.display = 'none';
+
+    if(videoSrc){
+      // Case 1: Video file
+      lightboxFrame.src = videoSrc;
+      lightboxFrame.style.display = 'block';
+    } else if (fullImgSrc) {
+      // Case 2: Full screen image (next 4 images)
+      lightboxImg.src = fullImgSrc;
+      lightboxImg.style.display = 'block';
+      lightboxFrame.src = ''; // Clear video
+    }
+  });
+});
+
+lightbox.addEventListener('click', ()=>{
+  lightbox.style.display = 'none';
+  lightboxFrame.src = ''; // stops video
+  lightboxImg.src = '';   // clear image
+});
+
+
+/* ========================
+   CORRECTED FOOTER LOGIC
+   ======================== */
+document.querySelectorAll('.footer-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const action = item.getAttribute('data-action');
+    
+    // Map footer action to viewSelect value
+    let viewValue = action;
+    if(action === 'tickets') viewValue = 'onward'; // Handle specific mismatch if needed
+    
+    // Update select and show view
+    if(viewValue){
+      viewSelect.value = viewValue;
+      showView(viewValue);
+      
+      // Scroll to the Information Navigator section so user sees the change
+      document.getElementById('navigatorSection').scrollIntoView({behavior:'smooth'});
+    }
+  });
+});
+
+
+const themeToggle = document.getElementById('themeToggle');
+let currentTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', currentTheme);
+themeToggle.addEventListener('click', ()=>{
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  localStorage.setItem('theme', currentTheme);
+  themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+});
+
+function adjustBodyForFooter(){
+  const fb = document.getElementById('footerBlock');
+  if(!fb) return;
+  const rect = fb.getBoundingClientRect();
+  document.body.style.paddingBottom = (Math.ceil(rect.height) + 12) + 'px';
+}
+window.addEventListener('load', adjustBodyForFooter);
+window.addEventListener('resize', adjustBodyForFooter);
+
+showView('schedule');
+
+function showTicketDisabledMessage(event) {
+  event.preventDefault();
+  alert("Ticket Download is disabled - Shield HR");
+}
+
+
+</script>
+
+
+<audio id="tourAudio" preload="auto">
+  <source src="https://shieldhrd-glitch.github.io/Tour/Final%20Shield.mp3" type="audio/mpeg">
+</audio>
+
+</body>
+</html>
