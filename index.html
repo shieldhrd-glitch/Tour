@@ -463,16 +463,46 @@
         <button id="clearSearch" class="btn btn-ghost" style="background:transparent; border:1px solid rgba(0,0,0,0.06); color:var(--primary); font-weight:800">Clear Search</button>
 
         <div style="flex:1; min-width:160px">
-          <select id="viewSelect" aria-label="Select information view">
-            <option value="schedule">Schedule</option>
-            <option value="onward">Onward Tickets</option>
-            <option value="bus_no">Bus_No</option>
-            <option value="roompair">Room Pairing</option>
-            <option value="return">Return Tickets</option>
-                                  </select>
+
+
+<select id="viewSelect" aria-label="Select information view" style="flex:1; min-width:150px;">
+  <option value="schedule">📅 Schedule</option>
+  <option value="teamAssignments">👥 Team Assignment</option>
+  <option value="onward">🚂 Onward</option>
+  <option value="bus">🚌 Bus Allocation</option>
+  <option value="roomPairing">🏨 Room pairing</option>
+  <option value="return">🚂 Return</option>
+</select>
+
         </div>
       </div>
     </div>
+    
+    
+    
+<div id="view-teamAssignments" class="info-view" style="display:none;">
+  <div class="card">
+    <div class="card-header"><h3 style="color:var(--primary);">Team Leader & Members</h3></div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th>Team Leader</th><th>Team Members</th></tr></thead>
+        <tbody id="teamBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="view-bus" class="info-view" style="display:none;">
+  <div class="card">
+    <div class="card-header"><h3 style="color:var(--primary);">Bus Allocation</h3></div>
+    <div id="busContent" class="table-scroll">
+       <table class="data-table">
+        <thead><tr><th>S.No</th><th>Name</th><th>Bus Number</th></tr></thead>
+        <tbody id="busBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
     <div id="mainContent" style="margin-top:14px"></div>
   </section>
@@ -547,6 +577,28 @@
   </section>
 
 
+
+<div id="view-teamAssignments" class="info-view" style="display:none;">
+  <div class="card">
+    <div class="card-header"><h3>Team Assignments</h3></div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th>Leader</th><th>Members</th></tr></thead>
+        <tbody id="teamBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="view-bus" class="info-view" style="display:none;">
+  <div class="card">
+    <div class="card-header"><h3>Bus Allocation</h3></div>
+    <div id="busContent" class="table-scroll"></div>
+  </div>
+</div>
+
+
+
   <section class="card" id="roomPairingCard" style="display:none">
     <h3>Room Pairing</h3>
     <p class="muted">Rooms are allocated based on the number of occupants accommodated, as per the room type</p>
@@ -569,9 +621,10 @@
 <div class="footer-block" id="footerBlock" role="contentinfo" aria-label="Footer actions and help">
   <div class="footer-buttons" role="navigation" aria-label="Footer buttons">
     <div class="footer-item" data-action="schedule">Schedule</div>
+    <div class="footer-item" data-action="teamAssignments">Teams</div>
     <div class="footer-item" data-action="onward">Onward</div>
-    <div class="footer-item" data-action="bus_no">Bus No</div>
-    <div class="footer-item" data-action="roompair">Room No</div>
+    <div class="footer-item" data-action="bus">Bus No</div>
+    <div class="footer-item" data-action="roomPairing">Room No</div>
     <div class="footer-item" data-action="return">Return</div>
     </div>
   <div class="footer-help">
@@ -613,6 +666,19 @@ updateTourTimer();
 /* =============
    Existing JS Data & Logic
    ============= */
+   
+   
+   const teamAssignments = [
+  { lead: "R.Reniya", members: ["Jayanthi R", "Gayathri V", "H Lavanya", "Maheswari", "Pingali Lakshmi Suchitra", "Preethi Varsha Shashi", "Rama Srivatsan", "Sadhana Shukla", "Sasi Kala P", "Sahithi Priya B"] },
+  { lead: "R.Uthra", members: ["D. Vijayalakshmi", "Harichithira B", "Parimala M", "Prema S", "Revathi P", "Sanghavi Sundaravadivelu", "Srivanipriya Hariharan", "Sudha S"] },
+  { lead: "Manoharan", members: ["G Bhagyaraj", "Loganathan N", "M.Boobathi", "Rajesh M", "V Vishnuvardhan", "Vikram N K"] },
+  { lead: "C Andal", members: ["Dhanam Selvakumar", "M.Kamali", "Mohana S", "P. Karpagam"] },
+  { lead: "Lakshmi Narasimhan Sampath", members: ["H.R. Balaji", "Hemanth Kumar K V", "L. Mahadevan", "Rajiv Bhanu Nair", "V Gowrishankar", "L Subramanian"] },
+  { lead: "V Raghuraman", members: ["M Velu Swamy", "Shanmugam M", "Akhshay Srinivasan", "Deepak Thimothy Ethiraj", "Senthil Kumar"] },
+  { lead: "N Sriram", members: ["Stalin Chandrasekaran", "M Gopi Krishnan", "Naga Raja Kurakula", "Ganesh K", "K Gopalakrishnan", "S.Venkataramanan", "M. Paul Cheliyan"] },
+  { lead: "V. Sekar", members: ["A. Madhuraiveeran", "Dhanush V", "Munusamy", "Rajasekar", "Ramanan", "S. Bharath", "Srinivas Murthy K N", "Thirumalai S"] }
+];
+   
    
 // Bus Provision Data
 const busAllocation = [
@@ -853,33 +919,30 @@ function toggleEcardList() {
     list.style.display = list.style.display === 'block' ? 'none' : 'block';
 }
 
-
-
 function generateATMCard(userName) {
-    // 1. TRY TO PLAY THE AUDIO IMMEDIATELY
+    // 1. START AUDIO PLAYBACK
     const audio = document.getElementById('tourAudio');
     if (audio) {
-        audio.currentTime = 0; // Restart sound if user clicks multiple times
-        audio.play().catch(error => {
-            console.error("Playback failed. Browsers require a click to play audio:", error);
-        });
+        audio.currentTime = 0; 
+        audio.play().catch(e => console.error("Audio playback failed:", e));
     }
 
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF('l', 'mm', [150, 95]);
 
-    // Find User Data
+    // --- DATA FETCHING ---
     const bus = busAllocation.find(b => b.name === userName) || { busNo: 'TBA' };
     const onward = onwardAllocation.find(o => o.name === userName) || { coach: 'TBA', seat: 'TBA' };
     const ret = returnAllocation.find(r => r.name === userName) || { coach: 'TBA', seat: 'TBA' };
     const room = roomPairings.find(rp => rp.occupants.some(occ => occ.includes(userName))) || { room: 'TBA', occupants: [] };
+    const teamData = teamAssignments.find(t => t.lead === userName || t.members.includes(userName)) || { lead: 'TBA', members: [] };
 
     // --- PAGE 1: FRONT SIDE ---
     doc.setDrawColor(30, 58, 138);
     doc.setFillColor(248, 250, 252);
     doc.roundedRect(5, 5, 140, 85, 5, 5, 'FD');
 
-    // Header
+    // Header Bar
     doc.setFillColor(30, 58, 138);
     doc.rect(5, 10, 140, 15, 'F');
     doc.setTextColor(255, 255, 255);
@@ -889,7 +952,7 @@ function generateATMCard(userName) {
     doc.setFontSize(10);
     doc.text("Your One-Stop Tour Guide | E-Card", 75, 22, { align: "center" });
 
-    // Personal Info
+    // Name and Bus Info
     doc.setTextColor(30, 58, 138);
     doc.setFontSize(10);
     doc.text("NAME:", 15, 35);
@@ -904,7 +967,7 @@ function generateATMCard(userName) {
     doc.setFont("helvetica", "bold");
     doc.text(bus.busNo, 40, 45);
 
-    // Room Section with Guest Names (Small & Normal Font)
+    // Room Section + Missing Guest Names
     doc.setTextColor(30, 58, 138);
     doc.setFont("helvetica", "normal");
     doc.text("ROOM NO:", 65, 45); 
@@ -916,40 +979,43 @@ function generateATMCard(userName) {
     doc.setFontSize(5.5); 
     const guestListText = `(Guest: ${room.occupants.join(", ")})`;
     const wrappedNames = doc.splitTextToSize(guestListText, 58); 
-    doc.text(wrappedNames, 85, 48); 
+    doc.text(wrappedNames, 85, 48); // Positioned under Room No
 
-    // Travel Details
+    // Train Details Box (Compressed slightly to fit Team info)
     doc.setDrawColor(200, 200, 200);
-    doc.roundedRect(12, 55, 126, 26, 3, 3, 'S');
-    doc.setFontSize(9);
+    doc.roundedRect(12, 53, 126, 18, 3, 3, 'S');
+    doc.setFontSize(8.5);
     doc.setTextColor(30, 58, 138);
-    doc.text("ONWARD (Train)", 15, 61);
-    doc.text("RETURN (Train)", 80, 61);
-
+    doc.text("ONWARD (Train)", 15, 57);
+    doc.text("RETURN (Train)", 80, 57);
     doc.setTextColor(0, 0, 0);
-    doc.setFontSize(8);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Coach/Seat: ${onward.coach} / ${onward.seat}`, 15, 68);
-    doc.text(`Status: ${onward.status || 'Confirmed'}`, 15, 74);
-    doc.text(`Coach/Seat: ${ret.coach} / ${ret.seat}`, 80, 68);
-    doc.text(`Status: ${ret.status || 'Confirmed'}`, 80, 74);
+    doc.setFontSize(7.5);
+    doc.text(`Coach/Seat: ${onward.coach} / ${onward.seat}`, 15, 62);
+    doc.text(`Coach/Seat: ${ret.coach} / ${ret.seat}`, 80, 62);
 
-    // Footer message
+    // --- NEW: TEAM LEAD & MEMBERS SECTION ---
+    doc.setTextColor(30, 58, 138);
+    doc.setFontSize(8.5);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Team Lead: ${teamData.lead}`, 15, 75);
+    
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(6.5);
+    doc.setTextColor(0, 0, 0);
+    const membersListText = `Team Members: ${teamData.members.join(", ")}`;
+    const wrappedMembers = doc.splitTextToSize(membersListText, 125);
+    doc.text(wrappedMembers, 15, 79);
+
     doc.setFontSize(7);
     doc.setTextColor(100, 100, 100);
-    doc.text("Shield Wish You Happy & Safe Journey to Chalo Chikmagalur", 75, 87, { align: "center" });
+    doc.text("Shield Wish You Happy & Safe Journey to Chalo Chikmagalur", 75, 89, { align: "center" });
 
-    // --- PAGE 2: INSTRUCTIONS ---
-    
-       // --- PAGE 2: BACK SIDE (INSTRUCTIONS & TEAM) ---
+    // --- PAGE 2: BACK SIDE (INSTRUCTIONS & TEAM) ---
     doc.addPage();
-    
-    // Background
     doc.setDrawColor(30, 58, 138);
     doc.setFillColor(248, 250, 252);
     doc.roundedRect(5, 5, 140, 85, 5, 5, 'FD');
 
-    // Header for Instructions
     doc.setFillColor(30, 58, 138);
     doc.rect(5, 5, 140, 10, 'F');
     doc.setTextColor(255, 255, 255);
@@ -957,7 +1023,6 @@ function generateATMCard(userName) {
     doc.setFont("helvetica", "bold");
     doc.text("GENERAL INSTRUCTIONS", 75, 11.5, { align: "center" });
 
-    // Full Instructions from Home Screen
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(6.5);
     doc.setFont("helvetica", "normal");
@@ -973,13 +1038,12 @@ function generateATMCard(userName) {
     ];
     let yPos = 20;
     inst.forEach(line => {
-        // Simple text wrapping if a line is too long
         const splitLine = doc.splitTextToSize(line, 130);
         doc.text(splitLine, 10, yPos);
         yPos += (splitLine.length * 3.5);
     });
 
-    // Coordination Team Section
+    // --- RESTORED: TOUR COORDINATION TEAM GRID ---
     doc.setDrawColor(30, 58, 138);
     doc.line(10, 48, 140, 48);
     doc.setFont("helvetica", "bold");
@@ -987,9 +1051,7 @@ function generateATMCard(userName) {
     doc.setFontSize(8.5);
     doc.text("TOUR COORDINATION TEAM", 75, 53, { align: "center" });
 
-    // Detailed Team Members (mimicking Home Screen style)
-    doc.setFontSize(6.5);
-    const team = [
+    const coordTeam = [
         { role: "Trip Mentor ", name: "Mr. Sriram", quote: '("Leading the way!" )', phone: "93434 63733" },
         { role: "Organizer ", name: "Mr. Veluswamy", quote: '("Master Plan done, fun on!" )', phone: "95155 55579" },
         { role: "Cameraman ", name: "Mr. Manoharan", quote: '("Memory Maker - Capturing smiles!" )', phone: "90948 12549" },
@@ -998,39 +1060,27 @@ function generateATMCard(userName) {
         { role: "Trip Support Lead ", name: "Mr. Shanmugam M", quote: '("Keeping everything on track!" )', phone: "94454 84551" }
     ];
 
-    let ty = 58;
-    let tx = 10;
-    team.forEach((member, i) => {
+    let ty = 58; let tx = 10;
+    coordTeam.forEach((member, i) => {
         doc.setFont("helvetica", "bold");
         doc.setTextColor(100, 100, 100);
+        doc.setFontSize(6.5);
         doc.text(member.role, tx, ty);
-        
-        doc.setFont("helvetica", "bold");
         doc.setTextColor(0, 0, 0);
         doc.text(member.name, tx, ty + 3);
-        
         doc.setFont("helvetica", "normal");
         doc.setFontSize(5.5);
         doc.text(member.quote, tx, ty + 5.5);
-        
         doc.setFont("helvetica", "bold");
         doc.setTextColor(30, 58, 138);
         doc.setFontSize(6.5);
         doc.text(member.phone, tx, ty + 8.5);
 
-        if ((i + 1) % 3 === 0) {
-            tx = 10;
-            ty += 13;
-        } else {
-            tx += 46;
-        }
+        if ((i + 1) % 3 === 0) { tx = 10; ty += 13; } else { tx += 46; }
     });
 
-    doc.save(`ECard_${userName.replace(' ', '_')}.pdf`);
+    doc.save(`ECard_${userName.replace(/\s+/g, '_')}.pdf`);
 }
-    
-    
-    
     
 
 
@@ -1044,6 +1094,7 @@ const lightbox = document.getElementById('lightbox');
 const lightboxFrame = document.getElementById('lightboxFrame');
 const lightboxImg = document.getElementById('lightboxImg');
 const footerBlock = document.getElementById('footerBlock');
+
 
 
 function matchesFilter(member, q){
@@ -1066,6 +1117,10 @@ function renderSchedule(){
   mainContent.innerHTML = html;
   roomPairingCard.style.display = 'none';
 }
+
+
+
+
 
 function renderBusTable(){
   const q = (searchInput.value || '').toLowerCase();
@@ -1110,16 +1165,15 @@ function renderTicketTable(list, title){
                 <td>${m.coach}</td>
                 <td>${m.seat}</td>
                 <td><span class="status confirm">${m.status}</span></td>
-                <td>
-  <a href="javascript:void(0)"
-     class="btn"
-     style="padding:6px 10px; font-size:0.88rem"
-     onclick="showTicketDisabledMessage(event)">
-     Download
-  </a>
-</td>
-
+           
+           
+                 <td><a href="${m.ticketLink}" target="_blank" class="btn" style="padding:6px 10px; font-size:0.88rem">Download</a></td>
+              
+           
+                
                  </tr>`;
+
+
     });
   }
 
@@ -1161,13 +1215,66 @@ function renderRoomPairing(){
   mainContent.innerHTML = '';
 }
 
-function showView(view){
-  if(view === 'schedule') renderSchedule();
-  else if(view === 'onward') renderTicketTable(onwardAllocation, 'Onward Tickets (This is a tentative allocation. Train coach and seat numbers will be updated in the final version, which will be shared two days before the trip) Train 12657');
-  else if(view === 'return') renderTicketTable(returnAllocation, 'Return Tickets (This is a tentative allocation. Train coach and seat numbers will be updated in the final version, which will be shared two days before the trip) Train 12008');
-  else if(view === 'bus_no') renderBusTable();
-  else if(view === 'roompair') renderRoomPairing();
+
+function showView(view) {
+  // 1. Hide ALL views first to clear the screen
+  document.querySelectorAll('.info-view').forEach(v => v.style.display = 'none');
+  
+  // 2. Hide the Room Pairing card specifically (since it's a separate element)
+  if (roomPairingCard) roomPairingCard.style.display = 'none';
+
+  // 3. Show ONLY the selected view
+  if (view === 'schedule') {
+    renderSchedule();
+  } else if (view === 'teamAssignments') {
+    renderTeams();
+    document.getElementById('view-teamAssignments').style.display = 'block';
+  } else if (view === 'onward') {
+    // Only renders when explicitly selected
+    renderTicketTable(onwardAllocation, 'Onward Tickets');
+  } else if (view === 'bus') {
+    renderBusAllocation();
+    document.getElementById('view-bus').style.display = 'block';
+  } else if (view === 'roomPairing') {
+    renderRoomPairing();
+  } else if (view === 'return') {
+    // Only renders when explicitly selected
+    renderTicketTable(returnAllocation, 'Return Tickets');
+  }
 }
+
+    
+
+    
+
+
+
+
+// Function to populate the Teams table
+function renderTeams() {
+  const tbody = document.getElementById('teamBody');
+  if (!tbody) return;
+  tbody.innerHTML = teamAssignments.map(team => `
+    <tr>
+      <td style="font-weight:bold; color:var(--primary);">${team.lead}</td>
+      <td style="font-size:0.85rem;">${team.members.join(", ")}</td>
+    </tr>
+  `).join('');
+}
+
+// Function to populate the Bus table
+function renderBusAllocation() {
+  const tbody = document.getElementById('busBody');
+  if (!tbody) return;
+  tbody.innerHTML = busAllocation.map(item => `
+    <tr>
+      <td>${item.sno}</td>
+      <td style="font-weight:700;">${item.name}</td>
+      <td style="color:var(--accent); font-weight:800;">${item.busNo}</td>
+    </tr>
+  `).join('');
+}
+
 
 viewSelect.addEventListener('change', ()=> showView(viewSelect.value));
 searchInput.addEventListener('input', ()=> showView(viewSelect.value));
@@ -1266,3 +1373,4 @@ function showTicketDisabledMessage(event) {
 
 </body>
 </html>
+
