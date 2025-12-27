@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chalo Chikmagalur Corporate Tour - Draft</title>
+  <title>Chalo Chikmagalur Corporate Tour - Live Version</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -467,7 +467,7 @@
 
 <select id="viewSelect" aria-label="Select information view" style="flex:1; min-width:150px;">
   <option value="schedule">📅 Schedule</option>
-  <option value="teamAssignments">👥 Team Assignment</option>
+  <option value="teamAssignments">👥 Group Leader</option>
   <option value="onward">🚂 Onward</option>
   <option value="bus">🚌 Bus Allocation</option>
   <option value="roomPairing">🏨 Room pairing</option>
@@ -482,10 +482,10 @@
     
 <div id="view-teamAssignments" class="info-view" style="display:none;">
   <div class="card">
-    <div class="card-header"><h3 style="color:var(--primary);">Team Leader & Members</h3></div>
+    <div class="card-header"><h3 style="color:var(--primary);">Group Leader & Members List</h3></div>
     <div class="table-scroll">
       <table class="data-table">
-        <thead><tr><th>Team Leader</th><th>Team Members</th></tr></thead>
+        <thead><tr><th>Group Leader</th><th>Members List</th></tr></thead>
         <tbody id="teamBody"></tbody>
       </table>
     </div>
@@ -621,7 +621,7 @@
 <div class="footer-block" id="footerBlock" role="contentinfo" aria-label="Footer actions and help">
   <div class="footer-buttons" role="navigation" aria-label="Footer buttons">
     <div class="footer-item" data-action="schedule">Schedule</div>
-    <div class="footer-item" data-action="teamAssignments">Teams</div>
+    <div class="footer-item" data-action="teamAssignments">Group Leader</div>
     <div class="footer-item" data-action="onward">Onward</div>
     <div class="footer-item" data-action="bus">Bus No</div>
     <div class="footer-item" data-action="roomPairing">Room No</div>
@@ -676,7 +676,7 @@ updateTourTimer();
   { lead: "Lakshmi Narasimhan Sampath", members: ["H.R. Balaji", "Hemanth Kumar K V", "L. Mahadevan", "Rajiv Bhanu Nair", "V Gowrishankar", "L Subramanian"] },
   { lead: "V Raghuraman", members: ["M Velu Swamy", "Shanmugam M", "Akhshay Srinivasan", "Deepak Thimothy Ethiraj", "Senthil Kumar"] },
   { lead: "N Sriram", members: ["Stalin Chandrasekaran", "M Gopi Krishnan", "Naga Raja Kurakula", "Ganesh K", "K Gopalakrishnan", "S.Venkataramanan", "M. Paul Cheliyan"] },
-  { lead: "V. Sekar", members: ["A. Madhuraiveeran", "Dhanush V", "Munusamy", "Rajasekar", "Ramanan", "S. Bharath", "Srinivas Murthy K N", "Thirumalai S"] }
+  { lead: "Munusamy", members: ["A. Madhuraiveeran", "Dhanush V", "V. Sekar", "Rajasekar", "Ramanan", "S. Bharath", "Srinivas Murthy K N", "Thirumalai S"] }
 ];
    
    
@@ -747,138 +747,138 @@ const busAllocation = [
 ];   
    
 const onwardAllocation = [
-{ sno: 1, name: "V Gowrishankar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 2, name: "M. Paul Cheliyan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 3, name: "Srinivas Murthy K N", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 4, name: "Lakshmi Narasimhan Sampath", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 5, name: "Rajiv Bhanu Nair", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 6, name: "L. Mahadevan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 7, name: "L Subramanian", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 8, name: "Ganesh K", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 9, name: "Naga Raja Kurakula", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 10, name: "Hemanth Kumar K V", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 11, name: "H.R. Balaji", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 12, name: "K Gopalakrishnan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 13, name: "Dhanush V", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 14, name: "Senthil Kumar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 15, name: "V Vishnuvardhan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 16, name: "S.Venkataramanan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 17, name: "Loganathan N", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 18, name: "M Gopi Krishnan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 19, name: "N Sriram", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 20, name: "Stalin Chandrasekaran", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 21, name: "S. Bharath", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 22, name: "V. Sekar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 23, name: "A. Madhuraiveeran", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 24, name: "Munusamy", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 25, name: "Rajasekar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 26, name: "Thirumalai S", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 27, name: "Ramanan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 28, name: "C Andal", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 29, name: "R.Reniya", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 30, name: "R.Uthra", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 31, name: "D. Vijayalakshmi", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 32, name: "Sasi Kala P", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 33, name: "Sanghavi Sundaravadivelu", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 34, name: "Prema S", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 35, name: "H Lavanya", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 36, name: "Sudha S", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 37, name: "Revathi P", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 38, name: "Pingali Lakshmi Suchitra", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 39, name: "Rama Srivatsan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 40, name: "Preethi Varsha Shashi", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 41, name: "Maheswari", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 42, name: "Sadhana Shukla", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 43, name: "Gayathri V", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 44, name: "Srivanipriya Hariharan", coach:"B3/B4/B4", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 45, name: "Harichithira B", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 46, name: "M.Kamali", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 47, name: "P. Karpagam", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 48, name: "Dhanam Selvakumar", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 49, name: "Mohana S", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 50, name: "Parimala M", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 51, name: "Shanmugam M", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 52, name: "M Velu Swamy", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 53, name: "M.Boobathi", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 54, name: "Deepak Thimothy Ethiraj", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 55, name: "Akhshay Srinivasan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 56, name: "Manoharan", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 57, name: "G Bhagyaraj", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 58, name: "Rajesh M", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 59, name: "V Raghuraman", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 60, name: "Vikram N K", coach:"B3/B4/B5", seat:"Will be updated", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 61, name: "Sahithi Priya B", coach:"B5_HYD", seat:"32", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 62, name: "Jayanthi R", coach:"NA", seat:"NA", status: "Confirmed", ticketLink: "NA" }
+{ sno: 1, name: "Shanmugam M", coach:"B2", seat:"56", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 2, name: "M Velu Swamy", coach:"B2", seat:"72", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 3, name: "M.Boobathi", coach:"B3", seat:"6", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 4, name: "Manoharan", coach:"B3", seat:"10", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 5, name: "G Bhagyaraj", coach:"B3", seat:"11", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 6, name: "Vikram N K", coach:"B3", seat:"13", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 7, name: "V Vishnuvardhan", coach:"B3", seat:"14", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 8, name: "Loganathan N", coach:"B3", seat:"18", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 9, name: "Rajesh M", coach:"B3", seat:"19", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 10, name: "V Raghuraman", coach:"B3", seat:"21", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 11, name: "Senthil Kumar", coach:"B3", seat:"22", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 12, name: "M Gopi Krishnan", coach:"B3", seat:"24", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 13, name: "Deepak Thimothy Ethiraj", coach:"B3", seat:"40", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 14, name: "Akhshay Srinivasan", coach:"B3", seat:"48", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 15, name: "Stalin Chandrasekaran", coach:"B3", seat:"50", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 16, name: "S. Bharath", coach:"B3", seat:"51", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 17, name: "V. Sekar", coach:"B3", seat:"53", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 18, name: "A. Madhuraiveeran", coach:"B3", seat:"54", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 19, name: "Munusamy", coach:"B3", seat:"61", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 20, name: "Rajasekar", coach:"B3", seat:"62", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 21, name: "Thirumalai S", coach:"B3", seat:"64", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 22, name: "Ramanan", coach:"B3", seat:"70", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 23, name: "DHANUSH V", coach:"B3", seat:"72", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 24, name: "R.Reniya", coach:"B4", seat:"3", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 25, name: "R.Uthra", coach:"B4", seat:"5", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 26, name: "D. Vijayalakshmi", coach:"B4", seat:"6", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 27, name: "Sasi Kala P", coach:"B4", seat:"8", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 28, name: "Sanghavi Sundaravadivelu", coach:"B4", seat:"24", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 29, name: "Prema S", coach:"B4", seat:"38", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 30, name: "H Lavanya", coach:"B4", seat:"40", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 31, name: "Sudha S", coach:"B4", seat:"42", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 32, name: "Revathi P", coach:"B4", seat:"43", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 33, name: "Pingali Lakshmi Suchitra", coach:"B4", seat:"45", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 34, name: "Preethi Varsha Shashi", coach:"B4", seat:"46", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 35, name: "Maheswari", coach:"B4", seat:"48", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 36, name: "Sadhana Shukla", coach:"B4", seat:"50", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 37, name: "Gayathri V", coach:"B4", seat:"51", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 38, name: "Srivanipriya Hariharan", coach:"B4", seat:"53", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 39, name: "Harichithira B", coach:"B4", seat:"54", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 40, name: "M.Kamali", coach:"B4", seat:"56", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 41, name: "P. Karpagam", coach:"B4", seat:"59", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 42, name: "Mohana S", coach:"B4", seat:"62", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 43, name: "Parimala M", coach:"B4", seat:"64", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 44, name: "C ANDAL", coach:"B4", seat:"69", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 45, name: "Dhanam Selvakumar", coach:"B4", seat:"70", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 46, name: "V Gowrishankar", coach:"B5", seat:"41", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 47, name: "M. Paul Cheliyan", coach:"B5", seat:"50", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 48, name: "Srinivas Murthy K N", coach:"B5", seat:"51", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 49, name: "Lakshmi Narasimhan Sampath", coach:"B5", seat:"53", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 50, name: "S.Venkataramanan", coach:"B5", seat:"54", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 51, name: "N Sriram", coach:"B5", seat:"59", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 52, name: "Ganesh K", coach:"B5", seat:"62", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 53, name: "Hemanth Kumar K V", coach:"B5", seat:"64", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 54, name: "Rajiv Bhanu Nair", coach:"B5", seat:"64", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 55, name: "K Gopalakrishnan", coach:"B5", seat:"70", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 56, name: "L Subramanian", coach:"B5", seat:"72", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 57, name: "Sahiti Priya B", coach:"B5_HYD", seat:"32", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1mGdpao4z62t6SK-nTPXoN-C82QKoyGOi" }, 
+{ sno: 58, name: "L. Mahadevan", coach:"Confirmed", seat:"Confirmed", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1zkGVnr5yFDOx097g8HNFu_hc2sS9wXKY" }, 
+{ sno: 59, name: "Rama Srivatsan", coach:"NA", seat:"NA", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 60, name: "Naga Raja Kurakula", coach:"NA", seat:"NA", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 61, name: "H.R. Balaji", coach:"NA", seat:"NA", status: "Confirmed", ticketLink: "NA" }, 
+{ sno: 62, name: "JAYANTHI R", coach:"NA", seat:"NA", status: "Confirmed", ticketLink: "NA" }
 ];
 
 const returnAllocation = [
- { sno: 1, name: "L Subramanian", coach:"C6", seat:"1", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 2, name: "Dhanush V", coach:"C6", seat:"3", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 3, name: "C Andal", coach:"C6", seat:"4", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 4, name: "Shanmugam M", coach:"C6", seat:"10", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 5, name: "M Velu Swamy", coach:"C6", seat:"11", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 6, name: "R.Reniya", coach:"C6", seat:"12", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 7, name: "R.Uthra", coach:"C6", seat:"13", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 8, name: "D. Vijayalakshmi", coach:"C6", seat:"14", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 9, name: "Sasi Kala P", coach:"C6", seat:"15", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 10, name: "Sanghavi Sundaravadivelu", coach:"C6", seat:"16", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 11, name: "Prema S", coach:"C6", seat:"17", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 12, name: "H Lavanya", coach:"C6", seat:"18", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 13, name: "Sudha S", coach:"C6", seat:"19", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 14, name: "Revathi P", coach:"C6", seat:"20", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 15, name: "Pingali Lakshmi Suchitra", coach:"C6", seat:"21", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 16, name: "Rama Srivatsan", coach:"C6", seat:"22", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 17, name: "Preethi Varsha Shashi", coach:"C6", seat:"24", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 18, name: "Maheswari", coach:"C6", seat:"25", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 19, name: "Sadhana Shukla", coach:"C6", seat:"26", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 20, name: "Gayathri V", coach:"C6", seat:"27", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 21, name: "Srivanipriya Hariharan", coach:"C6", seat:"28", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 22, name: "Harichithira B", coach:"C6", seat:"29", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 23, name: "M.Boobathi", coach:"C6", seat:"30", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 24, name: "Deepak Thimothy Ethiraj", coach:"C6", seat:"32", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 25, name: "Akhshay Srinivasan", coach:"C6", seat:"33", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 26, name: "Manoharan", coach:"C6", seat:"34", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 27, name: "G Bhagyaraj", coach:"C6", seat:"35", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 28, name: "Rajesh M", coach:"C6", seat:"36", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 29, name: "V Raghuraman", coach:"C6", seat:"37", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 30, name: "Vikram N K", coach:"C6", seat:"38", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 31, name: "Senthil Kumar", coach:"C6", seat:"39", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 32, name: "V Vishnuvardhan", coach:"C6", seat:"40", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 33, name: "V Gowrishankar", coach:"C6", seat:"42", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 34, name: "M. Paul Cheliyan", coach:"C6", seat:"43", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 35, name: "Srinivas Murthy K N", coach:"C6", seat:"44", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 36, name: "Lakshmi Narasimhan Sampath", coach:"C6", seat:"45", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 37, name: "S.Venkataramanan", coach:"C6", seat:"46", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 38, name: "Loganathan N", coach:"C6", seat:"47", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 39, name: "M Gopi Krishnan", coach:"C6", seat:"48", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 40, name: "N Sriram", coach:"C6", seat:"49", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 41, name: "Stalin Chandrasekaran", coach:"C6", seat:"50", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 42, name: "M.Kamali", coach:"C6", seat:"51", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 43, name: "P. Karpagam", coach:"C6", seat:"52", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 44, name: "S. Bharath", coach:"C6", seat:"53", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 45, name: "V. Sekar", coach:"C6", seat:"54", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 46, name: "A. Madhuraiveeran", coach:"C6", seat:"55", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 47, name: "Munusamy", coach:"C6", seat:"56", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 48, name: "Rajasekar", coach:"C6", seat:"57", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 49, name: "Dhanam Selvakumar", coach:"C6", seat:"58", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 50, name: "Thirumalai S", coach:"C6", seat:"59", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 51, name: "Ramanan", coach:"C6", seat:"60", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 52, name: "Mohana S", coach:"C6", seat:"62", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 53, name: "Ganesh K", coach:"C6", seat:"63", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 54, name: "Naga Raja Kurakula", coach:"C6", seat:"64", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 55, name: "Parimala M", coach:"C6", seat:"65", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 56, name: "Hemanth Kumar K V", coach:"C6", seat:"66", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 57, name: "Rajiv Bhanu Nair", coach:"C6", seat:"67", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 58, name: "H.R. Balaji", coach:"C6", seat:"69", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 59, name: "K Gopalakrishnan", coach:"C6", seat:"70", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 60, name: "Sahithi Priya B", coach:"B4(Hyd)", seat:"70", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 61, name: "L. Mahadevan", coach:"C6", seat:"78", status: "Confirmed", ticketLink: "NA" }, 
-{ sno: 62, name: "Jayanthi R", coach:"NA", seat:"NA", status: "Confirmed", ticketLink: "NA" }
+{ sno: 1, name: "L Subramanian", coach:"C6", seat:"1", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 2, name: "DHANUSH V", coach:"C6", seat:"3", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 3, name: "C ANDAL", coach:"C6", seat:"4", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 4, name: "Shanmugam M", coach:"C6", seat:"10", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 5, name: "M Velu Swamy", coach:"C6", seat:"11", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 6, name: "R.Reniya", coach:"C6", seat:"12", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 7, name: "R.Uthra", coach:"C6", seat:"13", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 8, name: "D. Vijayalakshmi", coach:"C6", seat:"14", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 9, name: "Sasi Kala P", coach:"C6", seat:"15", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 10, name: "Sanghavi Sundaravadivelu", coach:"C6", seat:"16", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 11, name: "Prema S", coach:"C6", seat:"17", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 12, name: "H Lavanya", coach:"C6", seat:"18", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 13, name: "Sudha S", coach:"C6", seat:"19", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 14, name: "Revathi P", coach:"C6", seat:"20", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 15, name: "Pingali Lakshmi Suchitra", coach:"C6", seat:"21", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 16, name: "Rama Srivatsan", coach:"C6", seat:"22", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 17, name: "Preethi Varsha Shashi", coach:"C6", seat:"24", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 18, name: "Maheswari", coach:"C6", seat:"25", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 19, name: "Sadhana Shukla", coach:"C6", seat:"26", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 20, name: "Gayathri V", coach:"C6", seat:"27", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 21, name: "Srivanipriya Hariharan", coach:"C6", seat:"28", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 22, name: "Harichithira B", coach:"C6", seat:"29", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 23, name: "M.Boobathi", coach:"C6", seat:"30", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 24, name: "Deepak Thimothy Ethiraj", coach:"C6", seat:"32", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 25, name: "Akhshay Srinivasan", coach:"C6", seat:"33", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 26, name: "Manoharan", coach:"C6", seat:"34", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 27, name: "G Bhagyaraj", coach:"C6", seat:"35", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 28, name: "Rajesh M", coach:"C6", seat:"36", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 29, name: "V Raghuraman", coach:"C6", seat:"37", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 30, name: "Vikram N K", coach:"C6", seat:"38", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 31, name: "Senthil Kumar", coach:"C6", seat:"39", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 32, name: "V Vishnuvardhan", coach:"C6", seat:"40", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 33, name: "V Gowrishankar", coach:"C6", seat:"42", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 34, name: "M. Paul Cheliyan", coach:"C6", seat:"43", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 35, name: "Srinivas Murthy K N", coach:"C6", seat:"44", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 36, name: "Lakshmi Narasimhan Sampath", coach:"C6", seat:"45", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 37, name: "S.Venkataramanan", coach:"C6", seat:"46", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 38, name: "Loganathan N", coach:"C6", seat:"47", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 39, name: "M Gopi Krishnan", coach:"C6", seat:"48", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 40, name: "N Sriram", coach:"C6", seat:"49", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 41, name: "Stalin Chandrasekaran", coach:"C6", seat:"50", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 42, name: "M.Kamali", coach:"C6", seat:"51", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 43, name: "P. Karpagam", coach:"C6", seat:"52", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 44, name: "S. Bharath", coach:"C6", seat:"53", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 45, name: "V. Sekar", coach:"C6", seat:"54", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 46, name: "A. Madhuraiveeran", coach:"C6", seat:"55", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 47, name: "Munusamy", coach:"C6", seat:"56", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 48, name: "Rajasekar", coach:"C6", seat:"57", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 49, name: "Dhanam Selvakumar", coach:"C6", seat:"58", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 50, name: "Thirumalai S", coach:"C6", seat:"59", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 51, name: "Ramanan", coach:"C6", seat:"60", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 52, name: "Mohana S", coach:"C6", seat:"62", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 53, name: "Ganesh K", coach:"C6", seat:"63", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 54, name: "Naga Raja Kurakula", coach:"C6", seat:"64", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 55, name: "Parimala M", coach:"C6", seat:"65", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 56, name: "Hemanth Kumar K V", coach:"C6", seat:"66", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 57, name: "Rajiv Bhanu Nair", coach:"C6", seat:"67", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 58, name: "H.R. Balaji", coach:"C6", seat:"69", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 59, name: "Sahiti Priya B", coach:"B4_Hyd", seat:"70", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1m85u_AYU2-GVyIUVd3tMlNWSOYG_y45J" }, 
+{ sno: 60, name: "K Gopalakrishnan", coach:"C6", seat:"70", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 61, name: "L. Mahadevan", coach:"C6", seat:"78", status: "Confirmed", ticketLink: "https://drive.google.com/uc?export=download&id=1xyTrmEW4i0GnjkGyMfVO_5mIjuAvYv-W" }, 
+{ sno: 62, name: "JAYANTHI R", coach:"NA", seat:"NA", status: "Confirmed", ticketLink: "NA" }
 ];
 
 const schedule = [
-  { day:"Day 1 -- Sunday, 4th Jan", activities:["Fresh up","Breakfast","Belur & Halebidu Visit","Lunch","Check-in & Campfire","Dinner"] },
-  { day:"Day 2 -- Monday, 5th Jan", activities:["Breakfast","Mullayyanagiri Peak Visit (trekking shoes may be required)","Lunch","Jhari Waterfalls & Sightseeing","Campfire & Dinner"] },
+  { day:"Day 1 -- Sunday, 4th Jan", activities:["Fresh up","Breakfast","Belur & Halebidu Visit","Lunch","Check-in Good Earth (Group) & Check-in CMK (Group)", "Chalo Chikmagalur Get-Together Day 1", "Campfire & Dinner"] },
+  { day:"Day 2 -- Monday, 5th Jan", activities:["Breakfast","Mullayyanagiri Peak Visit (trekking shoes may be required)","Lunch","Jhari Waterfalls & Sightseeing", "Chalo Chikmagalur Get-Together Day 2", "Campfire & Dinner"] },
   { day:"Day 3 -- Tuesday, 6th Jan", activities:["Breakfast","Checkout & Local Shopping","Lunch","Departure to Railway Station","Dinner at train"] }
 ];
 
@@ -997,12 +997,12 @@ function generateATMCard(userName) {
     doc.setTextColor(30, 58, 138);
     doc.setFontSize(8.5);
     doc.setFont("helvetica", "bold");
-    doc.text(`Team Lead: ${teamData.lead}`, 15, 75);
+    doc.text(`Group Leader: ${teamData.lead}`, 15, 75);
     
     doc.setFont("helvetica", "normal");
     doc.setFontSize(6.5);
     doc.setTextColor(0, 0, 0);
-    const membersListText = `Team Members: ${teamData.members.join(", ")}`;
+    const membersListText = `Members List: ${teamData.members.join(", ")}`;
     const wrappedMembers = doc.splitTextToSize(membersListText, 125);
     doc.text(wrappedMembers, 15, 79);
 
