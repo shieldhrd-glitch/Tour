@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chalo Chikmagalur Corporate Tour - Live Version</title>
+  <title>Chalo Chikmagalur Corporate Tour -- Draft Version</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -296,7 +296,7 @@
     <div class="brand">
       <img src="https://shieldhealthcare.in/wp-content/uploads/2024/09/Shield_Logo-removebg-preview.png" alt="Shield logo">
       <div>
-        <div class="brand-title">Chalo Chikmagalur Corporate Tour (Live Version)</div>
+        <div class="brand-title">Chalo Chikmagalur Corporate Tour (Draft Version)</div>
         <div class="muted" style="font-size:0.80rem">Shield Healthcare · Jan 3 - Jan 6, 2026</div>
       </div>
     </div>
@@ -439,15 +439,28 @@
    
    
     <ul style="margin-top:8px; padding-left:18px; color:var(--text); line-height:1.5">
-      <li>Bring travel necessities like toothbrush & paste, sufficient clothes, sweater, muffler, water bottle etc.</li>
-      <li>Carry <strong>Original ID Proof</strong> (Aadhar / Voter ID / Driving Licence).</li>
-      <li>Those who are under medications are requested to bring required medicines.</li>
-      <li>Carry electronic gadgets like mobile charger, camera to record special moments.</li>
-      <li>All valuable things to be kept safely.</li>
-      <li>Consumption of alcohol / prohibited drugs is strictly prohibited.</li>
-      <li>Everyone should follow the timing schedule strictly throughout the trip.</li>
-      <li>Kindly follow the instructions provided by the coordinators.</li>
-    </ul>
+  <li>Bring travel necessities such as toothbrush and paste, sufficient clothes, sweater, muffler, water bottle, etc.</li>
+  <li>Carry an original ID proof (Aadhaar / Voter ID / Driving Licence).</li>
+  <li>Participants who are on medication must carry the required medicines.</li>
+  <li>Carry essential electronic gadgets such as a mobile charger and camera to capture special moments.</li>
+  <li>All valuable belongings must be kept safely at all times.</li>
+  <li>Consumption of alcohol or prohibited drugs is strictly prohibited.</li>
+  <li>Participants must strictly follow the trip schedule and adhere to timings throughout the tour.</li>
+  <li>Kindly follow the instructions provided by the coordinators at all times.</li>
+</ul>
+
+<h3 style="margin-top:16px; color:var(--text);">Sightseeing Instructions (Falls, Jeep Ride &amp; Peak Hill Walk)</h3>
+<ul style="margin-top:8px; padding-left:18px; color:var(--text); line-height:1.5">
+  <li>Participants must strictly follow the safety instructions given by local guides and coordinators during sightseeing activities.</li>
+  <li>Jeep rides are adventurous in nature; ensuring personal safety as well as the safety of others is mandatory.</li>
+  <li>During the falls visit, slippery surfaces may be present; participants are advised to wear proper footwear with good grip.</li>
+  <li>For the peak hill walk (approximately 450–500 steps), participants should walk at their own comfort level and avoid rushing or overtaking others.</li>
+  <li>Senior participants or those with health issues (knee pain, breathing problems, etc.) are advised to proceed slowly and participate based on their comfort level.</li>
+  <li>Children (if any) must be under the constant supervision of accompanying adults.</li>
+  <li>Any unsafe behaviour, negligence, or misconduct may affect the entire group; participants are expected to act responsibly towards themselves and others.</li>
+</ul>
+    
+    
   </section>
 
   <section class="card" id="navigatorSection" aria-labelledby="navigatorHeading">
@@ -521,8 +534,8 @@
     <div style="display:grid; grid-template-columns: 1fr; gap:12px; margin-bottom:20px;">
       <div>
         <div style="color:var(--muted); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:700;">Basic Medical Support</div>
-        <div style="font-weight:700;">Mrs.Lavanya <span style="font-weight:400; font-size:0.85rem; color:var(--muted);">("Care first, fun always!" ❤️😄)</span></div>
-        <a href="tel:+919543098635" style="font-size:0.9rem; color:var(--accent); text-decoration:none;">9543098635</a>
+        <div style="font-weight:700;">Ms.Sanghavi <span style="font-weight:400; font-size:0.85rem; color:var(--muted);">("Care first, fun always!" ❤️😄)</span></div>
+        <a href="tel:+917401777009" style="font-size:0.9rem; color:var(--accent); text-decoration:none;">7401777009</a>
       </div>
 
       <div>
@@ -877,8 +890,8 @@ const returnAllocation = [
 ];
 
 const schedule = [
-  { day:"Day 1 -- Sunday, 4th Jan", activities:["Fresh up","Breakfast","Belur & Halebidu Visit","Lunch","Check-in Good Earth (Group) & Check-in CMK (Group)", "Chalo Chikmagalur Get-Together Day 1", "Campfire & Dinner"] },
-  { day:"Day 2 -- Monday, 5th Jan", activities:["Breakfast","Mullayyanagiri Peak Visit (trekking shoes may be required)","Lunch","Jhari Waterfalls & Sightseeing", "Chalo Chikmagalur Get-Together Day 2", "Campfire & Dinner"] },
+  { day:"Day 1 -- Sunday, 4th Jan", activities:["Fresh up","Breakfast","Belur & Halebidu Visit","Lunch","Check-in Good Earth (Group) & Check-in CMK (Group)", "Chalo Chikmagalur *Get-Together Event* Day 1", "Campfire & Dinner"] },
+  { day:"Day 2 -- Monday, 5th Jan", activities:["Breakfast","Mullayyanagiri Peak Visit (trekking shoes may be required)","Lunch","Jhari Waterfalls & Sightseeing", "Chalo Chikmagalur *Get-Together Event* Day 2", "Campfire & Dinner"] },
   { day:"Day 3 -- Tuesday, 6th Jan", activities:["Breakfast","Checkout & Local Shopping","Lunch","Departure to Railway Station","Dinner at train"] }
 ];
 
@@ -1011,75 +1024,142 @@ function generateATMCard(userName) {
     doc.text("Shield Wish You Happy & Safe Journey to Chalo Chikmagalur", 75, 89, { align: "center" });
 
     // --- PAGE 2: BACK SIDE (INSTRUCTIONS & TEAM) ---
-    doc.addPage();
-    doc.setDrawColor(30, 58, 138);
-    doc.setFillColor(248, 250, 252);
-    doc.roundedRect(5, 5, 140, 85, 5, 5, 'FD');
 
-    doc.setFillColor(30, 58, 138);
-    doc.rect(5, 5, 140, 10, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(10);
-    doc.setFont("helvetica", "bold");
-    doc.text("GENERAL INSTRUCTIONS", 75, 11.5, { align: "center" });
 
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(6.5);
-    doc.setFont("helvetica", "normal");
-    const inst = [
-        "1. Bring travel necessities like toothbrush & paste, sufficient clothes, sweater, muffler, water bottle etc.",
-        "2. Carry Original ID Proof (Aadhar / Voter ID / Driving Licence).",
-        "3. Those who are under medications are requested to bring required medicines.",
-        "4. Carry electronic gadgets like mobile charger, camera to record special moments.",
-        "5. All valuable things to be kept safely.",
-        "6. Consumption of alcohol / prohibited drugs is strictly prohibited.",
-        "7. Everyone should follow the timing schedule strictly throughout the trip.",
-        "8. Kindly follow the instructions provided by the coordinators."
-    ];
-    let yPos = 20;
-    inst.forEach(line => {
-        const splitLine = doc.splitTextToSize(line, 130);
-        doc.text(splitLine, 10, yPos);
-        yPos += (splitLine.length * 3.5);
-    });
+// --- PAGE 2: BACK SIDE (INSTRUCTIONS & TEAM) ---
 
-    // --- RESTORED: TOUR COORDINATION TEAM GRID ---
-    doc.setDrawColor(30, 58, 138);
-    doc.line(10, 48, 140, 48);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(30, 58, 138);
-    doc.setFontSize(8.5);
-    doc.text("TOUR COORDINATION TEAM", 75, 53, { align: "center" });
+// --- PAGE 2: BACK SIDE (INSTRUCTIONS & TEAM) ---
+doc.addPage();
 
-    const coordTeam = [
-        { role: "Trip Mentor ", name: "Mr. Sriram", quote: '("Leading the way!" )', phone: "93434 63733" },
-        { role: "Organizer ", name: "Mr. Veluswamy", quote: '("Master Plan done, fun on!" )', phone: "95155 55579" },
-        { role: "Cameraman ", name: "Mr. Manoharan", quote: '("Memory Maker - Capturing smiles!" )', phone: "90948 12549" },
-        { role: "HO Team Coordinator ", name: "Mrs. Uthra", quote: '("Captain - vibes ON!" )', phone: "99629 12554" },
-        { role: "CWH Team Coordinator ", name: "Mr. Sekar", quote: '("Captain - vibes ON!" )', phone: "80566 57113" },
-        { role: "Trip Support Lead ", name: "Mr. Shanmugam M", quote: '("Keeping everything on track!" )', phone: "94454 84551" }
-    ];
+const PAGE_BOTTOM = 92;
 
-    let ty = 58; let tx = 10;
-    coordTeam.forEach((member, i) => {
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(100, 100, 100);
-        doc.setFontSize(6.5);
-        doc.text(member.role, tx, ty);
-        doc.setTextColor(0, 0, 0);
-        doc.text(member.name, tx, ty + 3);
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(5.5);
-        doc.text(member.quote, tx, ty + 5.5);
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(30, 58, 138);
-        doc.setFontSize(6.5);
-        doc.text(member.phone, tx, ty + 8.5);
+// Outer container (MATCH PAGE HEIGHT)
+doc.setDrawColor(30, 58, 138);
+doc.setFillColor(248, 250, 252);
+doc.roundedRect(5, 5, 140, 85, 5, 5, 'FD');
 
-        if ((i + 1) % 3 === 0) { tx = 10; ty += 13; } else { tx += 46; }
-    });
+// Header bar
+doc.setFillColor(30, 58, 138);
+doc.rect(5, 5, 140, 10, 'F');
+doc.setTextColor(255, 255, 255);
+doc.setFontSize(9);
+doc.setFont("helvetica", "bold");
+doc.text("INSTRUCTIONS", 75, 11.5, { align: "center" });
 
-    doc.save(`ECard_${userName.replace(/\s+/g, '_')}.pdf`);
+// Divider (instruction area only)
+doc.setDrawColor(200, 200, 200);
+doc.line(75, 16, 75, 54);
+
+// Reset text
+doc.setTextColor(0, 0, 0);
+doc.setFont("helvetica", "normal");
+doc.setFontSize(5.4);
+
+/* ================= LEFT : GENERAL INSTRUCTIONS ================= */
+
+doc.setFont("helvetica", "bold");
+doc.text("General Instructions", 10, 19);
+doc.setFont("helvetica", "normal");
+
+const generalInst = [
+"* Bring travel necessities such as toothbrush and paste, sufficient clothes, sweater, muffler, water bottle, etc.",
+"* Carry an original ID proof (Aadhaar / Voter ID / Driving Licence).",
+"* Participants who are on medication must carry the required medicines.",
+"* Carry essential electronic gadgets such as a mobile charger and camera to capture special moments.",
+"* All valuable belongings must be kept safely at all times.",
+"* Consumption of alcohol or prohibited drugs is strictly prohibited.",
+"* Participants must strictly follow the trip schedule and adhere to timings throughout the tour.",
+"* Kindly follow the instructions provided by the coordinators at all times."
+];
+
+let leftY = 22;
+generalInst.forEach(line => {
+  const split = doc.splitTextToSize(line, 60);
+  doc.text(split, 10, leftY);
+  leftY += split.length * 2.6;
+});
+
+/* ================= RIGHT : SIGHTSEEING INSTRUCTIONS ================= */
+
+doc.setFont("helvetica", "bold");
+doc.text("Sightseeing Instructions", 80, 19);
+doc.setFont("helvetica", "normal");
+
+const sightInst = [
+"* Follow all safety instructions given by guides and coordinators during sightseeing.",
+"* Jeep rides are adventurous; personal and group safety is mandatory.",
+"* Wear proper footwear during falls visits due to slippery surfaces.",
+"* Walk at your comfort level during the peak hill walk (450–500 steps); avoid rushing.",
+"* Senior participants and those with health issues should proceed slowly.",
+"* Children must be under constant adult supervision.", 
+"* Unsafe behaviour or negligence affecting the group will not be tolerated."
+];
+
+let rightY = 22;
+sightInst.forEach(line => {
+  const split = doc.splitTextToSize(line, 60);
+  doc.text(split, 80, rightY);
+  rightY += split.length * 2.6;
+});
+
+// Safe start point for team section
+const instructionsEndY = Math.max(leftY, rightY) + 3;
+
+/* ================= TOUR COORDINATION TEAM ================= */
+
+doc.setDrawColor(30, 58, 138);
+doc.line(10, instructionsEndY, 140, instructionsEndY);
+
+doc.setFont("helvetica", "bold");
+doc.setTextColor(30, 58, 138);
+doc.setFontSize(7.6);
+doc.text("TOUR COORDINATION TEAM", 75, instructionsEndY + 5, { align: "center" });
+
+const coordTeam = [
+  { role: "Trip Mentor", name: "Mr. Sriram", quote: '("Leading the way!")', phone: "93434 63733" },
+  { role: "Organizer", name: "Mr. Veluswamy", quote: '("Master plan done, fun on!")', phone: "95155 55579" },
+  { role: "Cameraman", name: "Mr. Manoharan", quote: '("Capturing smiles!")', phone: "90948 12549" },
+  { role: "HO Team Coordinator", name: "Mrs. Uthra", quote: '("Captain – vibes ON!")', phone: "99629 12554" },
+  { role: "CWH Team Coordinator", name: "Mr. Sekar", quote: '("Captain – vibes ON!")', phone: "80566 57113" },
+  { role: "Trip Support Lead", name: "Mr. Shanmugam M", quote: '("Keeping everything on track!")', phone: "94454 84551" }
+];
+
+let ty = instructionsEndY + 9;
+let tx = 10;
+
+coordTeam.forEach((member, i) => {
+  if (ty + 9 > PAGE_BOTTOM) return;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(5.8);
+  doc.setTextColor(100, 100, 100);
+  doc.text(member.role, tx, ty);
+
+  doc.setTextColor(0, 0, 0);
+  doc.text(member.name, tx, ty + 2.8);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(5);
+  doc.text(member.quote, tx, ty + 5);
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(5.8);
+  doc.setTextColor(30, 58, 138);
+  doc.text(member.phone, tx, ty + 7.6);
+
+  if ((i + 1) % 3 === 0) {
+    tx = 10;
+    ty += 10;
+  } else {
+    tx += 46;
+  }
+});
+
+
+
+doc.save(`ECard_${userName.replace(/\s+/g, '_')}.pdf`);
+
+
 }
     
 
