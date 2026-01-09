@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Chalo Chikmagalur – Thank You</title>
+<title>Corporate Trip Memories – Thank You</title>
 
 <style>
 :root{
@@ -30,7 +30,7 @@ body{
   padding:12px;
 }
 
-/* Top Bar */
+/* Header */
 .topbar{
   display:flex;
   align-items:center;
@@ -104,11 +104,17 @@ body{
   line-height:1.7;
 }
 
-/* Button */
+/* Photo Buttons */
+.photo-buttons{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:18px;
+}
+
 .photo-btn{
-  display:inline-block;
-  margin-top:16px;
-  padding:12px 22px;
+  display:block;
+  padding:14px 20px;
   background:var(--accent);
   color:white;
   text-decoration:none;
@@ -116,6 +122,11 @@ body{
   border-radius:12px;
   box-shadow:0 6px 18px rgba(59,130,246,0.4);
   transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+.photo-btn span{
+  font-weight:600;
+  font-size:0.85rem;
+  opacity:0.9;
 }
 .photo-btn:hover{
   transform:translateY(-2px);
@@ -148,7 +159,7 @@ body{
       <img src="https://shieldhealthcare.in/wp-content/uploads/2024/09/Shield_Logo-removebg-preview.png" alt="Shield Healthcare">
     </div>
     <div>
-      <div class="brand-title">Chalo Chikmagalur Corporate Tour</div>
+      <div class="brand-title">Corporate Trip Memories</div>
       <div class="muted" style="font-size:0.8rem;">Shield Healthcare Pvt. Ltd.</div>
     </div>
   </div>
@@ -157,38 +168,56 @@ body{
   <div class="banner">
     <div class="banner-text">
       <h2>Thank You Team 💙</h2>
-      <p>A memorable journey filled with smiles & togetherness</p>
+      <p>Moments that turned into lifelong memories</p>
     </div>
   </div>
 
-  <!-- MESSAGE -->
+  <!-- THANK YOU + PHOTOS -->
   <div class="card">
     <h3>🙏 Heartfelt Thanks</h3>
     <p class="muted">
-      Thank you to each and every team member for making the  
-      <strong>Chalo Chikmagalur Corporate Tour</strong> a truly memorable experience.
+      A sincere thank you to each and every team member for your enthusiasm,
+      cooperation, and positive spirit during our corporate trips.
       <br><br>
-      From planning to execution, your cooperation, energy, and positivity
-      made this trip special. The memories created during this journey
-      will always remain close to our hearts.
+      These journeys were not just about destinations, but about bonding,
+      teamwork, and unforgettable moments shared together.
+      <br><br>
+      Relive our beautiful memories by exploring the photo albums below.
     </p>
 
-    <!-- PHOTO BUTTON -->
-    <a
-      class="photo-btn"
-      href="https://drive.google.com/drive/folders/1c3ltgluzevWMZ94IVe9Ndx-wbxQ1hxrb"
-      target="_blank"
-      rel="noopener noreferrer">
-      📸 View Trip Photos
-    </a>
+    <!-- PHOTO LINKS -->
+    <div class="photo-buttons">
+
+      <a class="photo-btn"
+         href="https://drive.google.com/drive/folders/1c3ltgluzevWMZ94IVe9Ndx-wbxQ1hxrb"
+         target="_blank" rel="noopener noreferrer">
+        Chalo Chikmagalur 2026<br>
+        <span>View Photo Album</span>
+      </a>
+
+      <a class="photo-btn"
+         href="https://drive.google.com/drive/folders/1-lyuhSwY6ablCRhh6-_vCgTMyfCfM4oL"
+         target="_blank" rel="noopener noreferrer">
+        Vagamon Vibes 2024<br>
+        <span>View Photo Album</span>
+      </a>
+
+      <a class="photo-btn"
+         href="https://drive.google.com/drive/folders/1i0QR8XE_UVJKi2AJa_RRBRoXkrf22vRH"
+         target="_blank" rel="noopener noreferrer">
+        Tamasha 2021<br>
+        <span>View Photo Album</span>
+      </a>
+
+    </div>
   </div>
 
   <!-- CLOSING NOTE -->
   <div class="card">
     <h3>🌿 Until We Travel Again</h3>
     <p class="muted">
-      Stay connected. Stay inspired.  
-      Thank you for being part of this beautiful journey.
+      Thank you for being part of these wonderful journeys.  
+      More destinations. More memories. More togetherness.
     </p>
   </div>
 
